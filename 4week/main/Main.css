@@ -29,32 +29,73 @@ img {
 
 .nav {
     display: flex;
-    align-items: center;
+    justify-content: center;
     height: 100px;
-    text-align: center;
     background: white;
 }
 
+.nav-gap {
+    display: flex;
+    padding: 0px 0px 0px 0px;
+    width: 20%;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.nav-button {
+    padding: 0px 0px 0px 0px;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .search {
+    padding: 0px 0px 0px 0px;
+    width: 20%;
     position: relative;
     display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
 }
 
 .section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     background: whitesmoke;
     height: 1000px;
 }
 
 .article {
     height: 95%;
+    display: flex;
+    justify-content: center;
 }
 
 .last-section {
     display: flex;
+    justify-content: center;
+}
+
+.section-page {
+    padding: 0px 0px 0px 0px;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.write-button {
+    padding: 0px 0px 0px 0px;
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .footer {
@@ -66,15 +107,10 @@ img {
 
 .title {
     display: flex;
-    flex-direction: column;
     justify-content: center;
 }
 
 .little-title {
     display: flex;
     justify-content: center;
-}
-
-.space {
-    width: 50px;
 }
