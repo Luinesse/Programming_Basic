@@ -1,0 +1,80 @@
+html {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+h1 {
+    font-size: 40px;
+    color:azure;
+}
+
+img {
+    position : absolute;
+    width : 17px;
+    right : 12px;
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #a8c0ff;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #3f2b96, #a8c0ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3f2b96, #a8c0ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+    height: 400px;
+    text-align: center;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    text-align: center;
+    background: white;
+}
+
+.search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: whitesmoke;
+    height: 1000px;
+}
+
+.article {
+    height: 95%;
+}
+
+.last-section {
+    display: flex;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    background: white;
+    height: 50px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.little-title {
+    display: flex;
+    justify-content: center;
+}
+
+.space {
+    width: 50px;
+}
