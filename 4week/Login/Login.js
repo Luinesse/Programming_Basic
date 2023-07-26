@@ -3,9 +3,14 @@
 const loginId = document.getElementById('login-id');
 const loginPw = document.getElementById('login-pw');
 const loginBtn = document.getElementById('login-button');
+const regisBtn = document.getElementById('register');
 
 function moveToHome() {
     location.replace("../Main/Main.html");
+}
+
+function moveToRegister() {
+    location.href = "../Register/Register.html";
 }
 
 function color() {
@@ -18,6 +23,7 @@ function color() {
     }
 }
 
+regisBtn.addEventListener("click", moveToRegister);
 loginBtn.addEventListener("click", moveToHome);
 loginId.addEventListener("keyup", color);
 loginPw.addEventListener("keyup", color);
