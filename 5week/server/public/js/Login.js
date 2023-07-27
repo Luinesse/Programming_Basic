@@ -6,7 +6,7 @@ const loginBtn = document.getElementById('login-button');
 const regisBtn = document.getElementById('register');
 
 function moveToHome() {
-    location.replace("");
+    location.replace("/");
 }
 
 function moveToRegister() {

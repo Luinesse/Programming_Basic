@@ -10,7 +10,7 @@ function moveToWrite() {
 }
 
 function moveToMain() {
-    location.href = "";
+    location.href = "/";
 }
 
 function moveToLogin() {

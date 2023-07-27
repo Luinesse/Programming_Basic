@@ -5,7 +5,7 @@ const titleH = document.getElementById("goMain");
 const uploadBtn = document.getElementById("upload-btn");
 
 function moveToMain() {
-    location.replace("");
+    location.replace("/");
 }
 
 function upload() {
