@@ -10,7 +10,7 @@ function moveToWrite() {
 }
 
 function moveToMain() {
-    location.href = "../html/Main.html";
+    location.href = "54.174.107.46/";
 }
 
 function moveToLogin() {
