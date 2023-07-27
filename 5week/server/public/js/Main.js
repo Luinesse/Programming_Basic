@@ -6,7 +6,7 @@ const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
 
 function moveToWrite() {
-    location.href = "../html/Write.html";
+    location.href = "/write";
 }
 
 function moveToMain() {
@@ -14,7 +14,7 @@ function moveToMain() {
 }
 
 function moveToLogin() {
-    location.href = "../html/Login.html";
+    location.href = "/login";
 }
 
 loginPg.addEventListener("click",moveToLogin);

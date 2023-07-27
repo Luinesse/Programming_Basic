@@ -19,7 +19,7 @@ function checkPW()
         return false;
     }
     alert("가입이 완료됐습니다.");
-    location.replace("../html/Login.html");
+    location.replace("/login");
 }
 
 regisBut.addEventListener("click",checkPW);

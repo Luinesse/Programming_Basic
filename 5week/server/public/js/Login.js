@@ -10,7 +10,7 @@ function moveToHome() {
 }
 
 function moveToRegister() {
-    location.href = "../html/Register.html";
+    location.href = "/register";
 }
 
 function color() {

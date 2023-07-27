@@ -21,6 +21,18 @@ app.get('/',(req, res) => {
 	res.sendFile(path.join(__dirname, './public', 'html', 'Main.html'));
 });
 
+app.get('/login',(req, res) => {
+	res.sendFile(path.join(__dirname, './public', 'html', 'Login.html'));
+});
+
+app.get('/register',(req, res) => {
+	res.sendFile(path.join(__dirname, './public', 'html', 'Register.html'));
+});
+
+app.get('/write',(req, res) => {
+	res.sendFile(path.join(__dirname, './public', 'html', 'Write.html'));
+});
+
 app.listen(port, () => {
 	console.log('Example app listening on port ' + port);
 });
