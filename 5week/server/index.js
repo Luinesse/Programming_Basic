@@ -8,6 +8,8 @@ const port = 3000;
 const path = require('path');
 const cors = require('cors');
 
+app.use(express.static(__dirname, '../', 'css'));
+
 app.get('/api',(req, res) => {
 	connection.query('SELECT * FROM test', (error, rows) => {
 		if (error) throw error;
@@ -17,8 +19,6 @@ app.get('/api',(req, res) => {
 
 app.get('/',(req, res) => {
 	res.sendFile(path.join(__dirname, '../', 'html', 'Main.html'));
-	res.sendFile(path.join(__dirname, '../', 'css', 'Main.css'));
-	res.sendFile(path.join(__dirname, '../', 'js', 'Main.js'));
 });
 
 app.listen(port, () => {
