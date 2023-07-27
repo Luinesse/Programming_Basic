@@ -8,7 +8,7 @@ const port = 3000;
 const path = require('path');
 const cors = require('cors');
 
-app.use(express.static(__dirname, '../', 'css'));
+app.use(express.static('public'));
 
 app.get('/api',(req, res) => {
 	connection.query('SELECT * FROM test', (error, rows) => {
