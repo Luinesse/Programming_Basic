@@ -1,0 +1,116 @@
+html {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+h1 {
+    font-size: 40px;
+    color:azure;
+}
+
+img {
+    position : absolute;
+    width : 17px;
+    right : 12px;
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #a8c0ff;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #3f2b96, #a8c0ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3f2b96, #a8c0ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+    height: 400px;
+    text-align: center;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    background: white;
+}
+
+.nav-gap {
+    display: flex;
+    padding: 0px 0px 0px 0px;
+    width: 20%;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.nav-button {
+    padding: 0px 0px 0px 0px;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.search {
+    padding: 0px 0px 0px 0px;
+    width: 20%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    background: whitesmoke;
+    height: 1000px;
+}
+
+.article {
+    height: 95%;
+    display: flex;
+    justify-content: center;
+}
+
+.last-section {
+    display: flex;
+    justify-content: center;
+}
+
+.section-page {
+    padding: 0px 0px 0px 0px;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.write-button {
+    padding: 0px 0px 0px 0px;
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    background: white;
+    height: 50px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+.little-title {
+    display: flex;
+    justify-content: center;
+}
