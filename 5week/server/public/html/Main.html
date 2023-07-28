@@ -8,6 +8,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/Main.css">
+    <script>
+        fetch('http://54.174.107.46:80/api')
+            .then((res) => res.json())
+            .then((res) => {
+                const table = document.querySelector('table');
+                res.forEach((row) => {
+                    const tr = document.createElement('tr');
+                    ['id', 'name', 'msg'].forEach((key) => {
+                        const cell = document.createElement('td');
+                        cell.textContent = row[key];
+                        tr.appendChild(cell);
+                    });
+                    table.appendChild(tr);
+                });
+            });
+    </script>
 </head>
 <body>
     <div class="wrap">
@@ -42,7 +58,13 @@
         </div>
         <div class="section">
             <div class="article">
-
+                <table>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>msg</th>
+                    </tr>
+                </table>
             </div>
             <div class="last-section">
                 <div class="nav-gap"></div>
