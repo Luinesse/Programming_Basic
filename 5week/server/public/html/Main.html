@@ -15,7 +15,7 @@
                 const table = document.querySelector('table');
                 res.forEach((row) => {
                     const tr = document.createElement('tr');
-                    ['id', 'name', 'msg'].forEach((key) => {
+                    ['title', 'article', 'username', 'boardDate'].forEach((key) => {
                         const cell = document.createElement('td');
                         cell.textContent = row[key];
                         tr.appendChild(cell);
@@ -60,9 +60,10 @@
             <div class="article">
                 <table>
                     <tr>
-                        <th>id</th>
-                        <th>name</th>
-                        <th>msg</th>
+                        <th>title</th>
+                        <th>article</th>
+                        <th>username</th>
+                        <th>boardDate</th>
                     </tr>
                 </table>
             </div>

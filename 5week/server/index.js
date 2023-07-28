@@ -11,7 +11,7 @@ const cors = require('cors');
 app.use(express.static('public'));
 
 app.get('/api',(req, res) => {
-	connection.query('SELECT * FROM test', (error, rows) => {
+	connection.query('SELECT * FROM boardInfo', (error, rows) => {
 		if (error) throw error;
 		res.send(rows);
 	});
