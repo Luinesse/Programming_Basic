@@ -45,6 +45,10 @@ app.post('/login', (req, res) => {
 			if(results.length > 0) {
 				req.session.is_logined = true;
 				req.session.nickname = id;
+				res.cookie("user", id, {
+					expires : new Date(Date.now() + 900000),
+					httpOnly : true
+				});
 				req.session.save(() => {
 					res.redirect('/');
 				});
