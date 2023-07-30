@@ -40,7 +40,7 @@ app.post('/register', (req, res) => {
 	const { id, password } = req.body;
 	
 	if(id && password) {
-		connection.query('SELECT * FROM userInfo WHERE = ?', [id], (error, results, fields) => {
+		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
 			if(error)	throw error;
 			if(results.length <= 0) {
 				connection.query('INSERT INTO userInfo (id, pw) VALUES(?,?)', [id, password], (error, data) => {
