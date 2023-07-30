@@ -13,6 +13,11 @@ function moveToMain() {
     location.href = "/";
 }
 
+function moveToLogin() {
+    location.href = "/login";
+}
+
+loginPg.addEventListener("click",moveToLogin);
 mainPg.addEventListener("click",moveToMain);
 writePg.addEventListener("click",moveToWrite);
 titleH.addEventListener("click",moveToMain);
