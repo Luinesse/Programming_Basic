@@ -36,6 +36,27 @@ app.use(
 	})
 );
 
+app.post('/login', (req, res) => {
+	const { id, password } = req.body;
+
+	if(id && password) {
+		connection.query('SELECT * FROM userInfo WHERE id = ? AND pw = ?', [id, password], (error, results, fields) => {
+			if(error)	throw error;
+			if(results.length > 0) {
+				req.session.is_logined = true;
+				req.session.nickname = id;
+				req.session.save(() => {
+					res.redirect('/');
+				});
+			} else {
+				res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); location.href="/login";</script>');
+			}
+		});
+	} else {
+		res.send('<script type="text/javascript">alert("아이디와 비밀번호를 입력하세요."); location.href="/login";</script>');
+	}
+})
+
 app.post('/register', (req, res) => {
 	const { id, password } = req.body;
 	
@@ -54,7 +75,7 @@ app.post('/register', (req, res) => {
 	} else {
 		res.send('<script type="text/javascript">alert("입력되지 않은 정보가 있습니다."); location.href="/register";</script>');
 	}
-})
+});
 
 app.get('/api',(req, res) => {
 	connection.query('SELECT * FROM boardInfo', (error, rows) => {
