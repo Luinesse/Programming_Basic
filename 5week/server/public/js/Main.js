@@ -4,12 +4,14 @@ const loginPg = document.getElementById('Login-page');
 const mainPg = document.getElementById('Main-page');
 const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
+const cookies = "<%= user %>";
 
-function getCookie(name) {
-    let matches = document.cookie.match(new RegExp (
-        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
+if(cookies === "false") {
+    document.querySelector(".sign-text").innerHTML = "Login";
+    document.querySelector(".sign-text").href = "/login";
+} else {
+    document.querySelector(".sign-text").innerHTML = "Logout";
+    document.querySelector(".sign-text").href = "/logout";
 }
 
 function moveToWrite() {
@@ -18,14 +20,6 @@ function moveToWrite() {
 
 function moveToMain() {
     location.href = "/";
-}
-
-if(getCookie(user) != undefined) {
-    document.querySelector(".sign-text").innerHTML = "로그인";
-    document.querySelector(".sign-text").href = "/login";
-} else {
-    document.querySelector(".sign-text").innerHTML = "로그아웃";
-    document.querySelector(".sign-text").href = "/logout";
 }
 
 mainPg.addEventListener("click",moveToMain);
