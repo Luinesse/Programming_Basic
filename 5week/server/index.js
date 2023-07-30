@@ -106,6 +106,17 @@ app.get('/write',(req, res) => {
 	res.sendFile(path.join(__dirname, './public', 'html', 'Write.html'));
 });
 
+app.get('/logout',(req,res) => {
+	req.session.destroy((err) => {
+		if(err)
+			console.log(err);
+		else {
+			res.clearCookie('user');
+			res.redirect("/");
+		}
+	})
+})
+
 app.listen(port, () => {
 	console.log('Example app listening on port ' + port);
 });
