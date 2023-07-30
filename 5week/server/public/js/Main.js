@@ -13,7 +13,7 @@ if(document.cookie.indexOf('user=') === -1) {
     });
 }
 else {
-    userhi.textContent = '  ' + document.cookie.split('user=')[1].split(';')[0] + '님 환영합니다.  ';
+    userhi.textContent = document.cookie.split('user=')[1].split(';')[0] + '님 환영합니다.';
     state.textContent = 'Logout';
     state.addEventListener('click', e => {
         location.replace("/logout");
