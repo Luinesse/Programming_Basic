@@ -4,6 +4,7 @@ const mainPg = document.getElementById('Main-page');
 const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
+const userhi = document.querySelector(".hi");
 
 if(document.cookie.indexOf('user=') === -1) {
     state.textContent = 'Login';
@@ -12,7 +13,6 @@ if(document.cookie.indexOf('user=') === -1) {
     });
 }
 else {
-    const userhi = document.querySelector(".hi");
     userhi.textContent = document.cookie.split('user=')[1].split(';')[0] + '님 환영합니다.';
     state.textContent = 'Logout';
     state.addEventListener('click', e => {
