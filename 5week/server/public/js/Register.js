@@ -18,8 +18,6 @@ function checkPW()
         alert("8~20자 공백을 제외한 영문 대소문자, 숫자, 특수문자를 사용하세요.");
         return false;
     }
-    alert("가입이 완료됐습니다.");
-    location.replace("/login");
 }
 
 regisBut.addEventListener("click",checkPW);

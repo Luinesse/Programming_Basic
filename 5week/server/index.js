@@ -7,8 +7,52 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const cors = require('cors');
+const users = [];
 
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(
+	bodyParser.urlencoded( {
+		extended : false,
+	} )
+);
+app.use(cookieParser());
+app.use(
+	expressSession( {
+		secret : "my key",
+		resave : true,
+		saveUninitialized : true,
+	} )
+);
+app.use(express.urlencoded({ extended : false }));
 app.use(express.static('public'));
+
+app.use(
+	cors({
+		origin : 'http://54.174.107.46:3000',
+		credentials : true
+	})
+);
+
+app.post('/register', (req, res) => {
+	const { id, password } = req.body;
+	
+	if(id && password) {
+		connection.query('SELECT * FROM userInfo WHERE = ?', [id], (error, results, fields) => {
+			if(error)	throw error;
+			if(results.length <= 0) {
+				connection.query('INSERT INTO userInfo (id, pw) VALUES(?,?)', [id, password], (error, data) => {
+					if(error)	throw error2;
+					res.send('<script type="text/javascript">alert("회원가입이 완료됐습니다."); location.replace("/login");</script>');
+				})
+			} else {
+				response.send('<script type="text/javascript">alert("이미 존재하는 아이디 입니다."); location.href="/register";</script>');
+			}
+		})
+	} else {
+		response.send('<script type="text/javascript">alert("입력되지 않은 정보가 있습니다."); location.href="/register";</script>');
+	}
+})
 
 app.get('/api',(req, res) => {
 	connection.query('SELECT * FROM boardInfo', (error, rows) => {
@@ -36,11 +80,4 @@ app.get('/write',(req, res) => {
 app.listen(port, () => {
 	console.log('Example app listening on port ' + port);
 });
-
-app.use(
-	cors({
-		origin : 'http://54.174.107.46:3000',
-		credentials : true
-	})
-);
 
