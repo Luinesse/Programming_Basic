@@ -2,12 +2,13 @@ const express = require('express');
 const mysql = require('mysql');
 const dbconfig = require('../../../test/dbinfo.js');
 const connection = mysql.createConnection(dbconfig);
+const bodyParser = require('body-parser');
+const session = require('express-session');
 
 const app = express();
 const port = 3000;
 const path = require('path');
 const cors = require('cors');
-const users = [];
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -18,7 +19,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(
-	expressSession( {
+	session( {
 		secret : "my key",
 		resave : true,
 		saveUninitialized : true,
