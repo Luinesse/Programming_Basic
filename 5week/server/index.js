@@ -4,6 +4,7 @@ const dbconfig = require('../../../test/dbinfo.js');
 const connection = mysql.createConnection(dbconfig);
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const port = 3000;
