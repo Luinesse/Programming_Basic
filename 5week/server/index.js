@@ -21,7 +21,7 @@ app.use(
 app.use(cookieParser());
 app.use(
 	session( {
-		secret : "my key",
+		secret : 'g7$In!2@S#%9Oc$5mB',
 		resave : true,
 		saveUninitialized : true,
 	} )
@@ -43,15 +43,16 @@ app.post('/login', (req, res) => {
 		connection.query('SELECT * FROM userInfo WHERE id = ? AND pw = ?', [id, password], (error, results, fields) => {
 			if(error)	throw error;
 			if(results.length > 0) {
-				req.session.is_logined = true;
-				req.session.nickname = id;
-				res.cookie("user", id, {
-					expires : new Date(Date.now() + 900000),
-					httpOnly : true
-				});
-				req.session.save(() => {
-					res.redirect('/');
-				});
+				if(req.session.user)
+					res.redirect("/");
+				else {
+					req.session.user = {
+						id : req.body.id,
+					}
+
+					res.setHeader('Set-Cookie', ['user=' + req.body.id]);
+					res.redirect("/");
+				}
 			} else {
 				res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); location.href="/login";</script>');
 			}
@@ -89,6 +90,7 @@ app.get('/api',(req, res) => {
 });
 
 app.get('/',(req, res) => {
+	console.log(req.session);
 	res.sendFile(path.join(__dirname, './public', 'html', 'Main.html'));
 });
 

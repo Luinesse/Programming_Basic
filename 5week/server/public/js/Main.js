@@ -1,34 +1,21 @@
 "use strict";
 
-//const loginPg = document.getElementById('Login-page');
 const mainPg = document.getElementById('Main-page');
 const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
+const state = document.querySelector(".sign-text");
 
-function getCookie(name) {
-    var nameOfCookie = name + "=";
-    var x = 0;
-    while(x <= document.cookie.length) {
-        var y = (x + nameOfCookie.length);
-        if(document.cookie.substring(x,y) == nameOfCookie) {
-            if((endOfCookie = document.cookie.indexOf(";",y)) == -1)
-                endOfCookie = document.cookie.length;
-            return unescape(document.cookie.substring(y, endOfCookie));
-        }
-        x = document.cookie.indexOf("",x) + 1;
-        if(x == 0)
-            break;
-    }
-    return "";
+if(document.cookie.indexOf('user=') === -1) {
+    state.textContent = 'Login';
+    state.addEventListener('click', e => {
+        location.href = '/login';
+    });
 }
-
-var cookie = getCookie("user");
-if(cookie != "") {
-    document.querySelector(".sign-text").innerHTML = "Logout";
-    document.querySelector(".sign-text").href = "./logout";
-} else {
-    document.querySelector(".sign-text").innerHTML = "Login";
-    document.querySelector(".sign-text").href = "./login";
+else {
+    state.textContent = 'Logout';
+    state.addEventListener('click', e => {
+        location.href = '/logout';
+    });
 }
 
 function moveToWrite() {
@@ -39,11 +26,6 @@ function moveToMain() {
     location.href = "/";
 }
 
-//function moveToLogin() {
-//    location.href = "/login";
-//}
-
-//loginPg.addEventListener("click",moveToLogin);
 mainPg.addEventListener("click",moveToMain);
 writePg.addEventListener("click",moveToWrite);
 titleH.addEventListener("click",moveToMain);
