@@ -83,10 +83,10 @@ app.post('/register', (req, res) => {
 });
 
 app.post('/write', (req, res) => {
-	const { title, article } = req.body;
+	const { wrote_title, wrote_article } = req.body;
 
-	if(title && article) {
-		connection.query('INSERT INTO boardInfo (title, article, username, boardDate) VALUES(?,?,?,CURRENT_TIMESTAMP)', [title, article, req.body.user.id], (error, data) => {
+	if(wrote_title && wrote_article) {
+		connection.query('INSERT INTO boardInfo (title, article, username, boardDate) VALUES(?,?,?,CURRENT_TIMESTAMP)', [wrote_title, wrote_article, req.body.user.id], (error, data) => {
 			if(error)	throw error;
 			res.send('<script type="text/javascript">alert("작성이 완료됐습니다."); location.replace("/");</script>');
 		});
