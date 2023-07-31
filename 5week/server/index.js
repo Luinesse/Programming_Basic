@@ -103,7 +103,10 @@ app.get('/register',(req, res) => {
 });
 
 app.get('/write',(req, res) => {
-	res.sendFile(path.join(__dirname, './public', 'html', 'Write.html'));
+	if(req.session.user)
+		res.sendFile(path.join(__dirname, './public', 'html', 'Write.html'));
+	else
+		res.send('<script type="text/javascript">alert("로그인 후 이용해 주세요."); location.href="/";</script>');
 });
 
 app.get('/logout',(req,res) => {
