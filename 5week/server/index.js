@@ -60,7 +60,7 @@ app.post('/login', (req, res) => {
 	} else {
 		res.send('<script type="text/javascript">alert("아이디와 비밀번호를 입력하세요."); location.href="/login";</script>');
 	}
-})
+});
 
 app.post('/register', (req, res) => {
 	const { id, password } = req.body;
@@ -72,13 +72,26 @@ app.post('/register', (req, res) => {
 				connection.query('INSERT INTO userInfo (id, pw) VALUES(?,?)', [id, password], (error, data) => {
 					if(error)	throw error2;
 					res.send('<script type="text/javascript">alert("회원가입이 완료됐습니다."); location.replace("/login");</script>');
-				})
+				});
 			} else {
 				res.send('<script type="text/javascript">alert("이미 존재하는 아이디 입니다."); location.href="/register";</script>');
 			}
-		})
+		});
 	} else {
 		res.send('<script type="text/javascript">alert("입력되지 않은 정보가 있습니다."); location.href="/register";</script>');
+	}
+});
+
+app.post('/write', (req, res) => {
+	const { title, article } = req.body;
+
+	if(title && article) {
+		connection.query('INSERT INTO boardInfo (title, article, username, boardDate) VALUES(?,?,?,CURRENT_TIMESTAMP)', [title, article, req.body.user.id], (error, data) => {
+			if(error)	throw error;
+			res.send('<script type="text/javascript">alert("작성이 완료됐습니다."); location.replace("/");</script>');
+		});
+	} else {
+		res.send('<script type="text/javascript">alert("제목과 내용을 입력해 주세요."); location.replace("/write");</script>');
 	}
 });
 

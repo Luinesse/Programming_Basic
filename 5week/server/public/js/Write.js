@@ -8,9 +8,5 @@ function moveToMain() {
     location.replace("/");
 }
 
-function upload() {
-//db 연동하고 작성.
-}
-
 mainPg.addEventListener("click",moveToMain);
 titleH.addEventListener("click",moveToMain);
