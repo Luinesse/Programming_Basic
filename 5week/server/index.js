@@ -88,8 +88,8 @@ app.post('/write', (req, res) => {
 	if(wrote_title && wrote_article) {
 		connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
 			if(error)	throw error;
-			connection.query('INSERT INTO boardInfo (title, article, username, boardDate, userInfo_uid) VALUES(?,?,?,CURRENT_TIMESTAMP,?)', [wrote_title, wrote_article, req.session.user.id, results], (error, data) => {
-				if(error)	throw error;
+			connection.query('INSERT INTO boardInfo (title, article, username, boardDate, userInfo_uid) VALUES(?,?,?,CURRENT_TIMESTAMP,?)', [wrote_title, wrote_article, req.session.user.id, results[0].uid], (error, data) => {
+				if(error)	throw error2;
 				res.send('<script type="text/javascript">alert("작성이 완료됐습니다."); location.replace("/");</script>');
 			});
 		});
