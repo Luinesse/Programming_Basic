@@ -86,9 +86,12 @@ app.post('/write', (req, res) => {
 	const { wrote_title, wrote_article } = req.body;
 
 	if(wrote_title && wrote_article) {
-		connection.query('INSERT INTO boardInfo (title, article, username, boardDate) VALUES(?,?,?,CURRENT_TIMESTAMP)', [wrote_title, wrote_article, req.session.user.id], (error, data) => {
+		connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
 			if(error)	throw error;
-			res.send('<script type="text/javascript">alert("작성이 완료됐습니다."); location.replace("/");</script>');
+			connection.query('INSERT INTO boardInfo (title, article, username, boardDate, userInfo_uid) VALUES(?,?,?,CURRENT_TIMESTAMP,?)', [wrote_title, wrote_article, req.session.user.id, results], (error, data) => {
+				if(error)	throw error;
+				res.send('<script type="text/javascript">alert("작성이 완료됐습니다."); location.replace("/");</script>');
+			});
 		});
 	} else {
 		res.send('<script type="text/javascript">alert("제목과 내용을 입력해 주세요."); location.replace("/write");</script>');
