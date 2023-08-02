@@ -12,22 +12,22 @@
         fetch('https://luinesse.store/api')
             .then((res) => res.json())
             .then((res) => {
-                const table = document.querySelector('table');
+                const board = document.querySelector('.article');
                 res.forEach((row) => {
-                    const tr = document.createElement('tr');
+                    const divCell = document.createElement('div');
                     ['title', 'article', 'username', 'boardDate'].forEach((key) => {
-                        const cell = document.createElement('td');
+                        const element = document.createElement('p');
                         if (key === 'boardDate') {
                             const dateValue = row[key].substring(0, 10);
-                            cell.textContent = dateValue;
+                            element.textContent = dateValue;
                         } else {
-                            cell.textContent = row[key];
+                            element.textContent = row[key];
                         }
-                        tr.appendChild(cell);
+                        divCell.appendChild(element);
                     });
                     const hr = document.createElement('hr');
-                    table.appendChild(hr);
-                    table.appendChild(tr);
+                    board.appendChild(divCell);
+                    board.appendChild(hr);
                 });
             });
     </script>
@@ -68,13 +68,11 @@
         </div>
         <div class="section">
             <div class="article">
-                <table>
-                    <tr>
-                        <th>제목 및 내용</th>
-                        <th>작성자</th>
-                        <th>게시일자</th>
-                    </tr>
-                </table>
+                <div class="article-nav">
+                    <h3>제목 및 내용</h3>
+                    <h3>작성자</h3>
+                    <h3>게시일자</h3>
+                </div>
             </div>
             <div class="last-section">
                 <div class="nav-gap"></div>
