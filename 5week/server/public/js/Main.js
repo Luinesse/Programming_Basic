@@ -28,6 +28,15 @@ function moveToMain() {
     location.href = "/";
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const categoryButton = document.querySelector('.category-button');
+    const menu = document.querySelector('.menu');
+
+    categoryButton.addEventListener('click', () => {
+        menu.classList.toggle('open');
+    });
+});
+
 mainPg.addEventListener("click",moveToMain);
 writePg.addEventListener("click",moveToWrite);
 titleH.addEventListener("click",moveToMain);

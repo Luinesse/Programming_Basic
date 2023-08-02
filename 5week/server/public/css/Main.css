@@ -1,5 +1,12 @@
 html {
     font-family: 'Nanum Gothic', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
@@ -32,6 +39,37 @@ img {
     justify-content: center;
     height: 100px;
     background: white;
+}
+
+.category-button {
+    padding: 0px 0px 0px 0px;
+    width: 20%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: hidden;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 15%;
+    height: 100%;
+    background-color: white;
+    padding: 10px;
+    transition: left 0.3s ease;
+}
+
+.menu.open {
+    left: 0;
+    height: 120%;
 }
 
 .nav-gap {
