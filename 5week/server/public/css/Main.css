@@ -114,13 +114,6 @@ img {
     align-items: center;
 }
 
-.article-nav {
-    display: flex;
-    width: 60%;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
 .last-section {
     display: flex;
     justify-content: center;
