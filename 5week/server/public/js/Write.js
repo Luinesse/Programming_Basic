@@ -3,6 +3,8 @@
 const mainPg = document.getElementById("Main-page");
 const titleH = document.getElementById("goMain");
 const uploadBtn = document.getElementById("upload-btn");
+const state = document.querySelector(".sign-text");
+const userhi = document.querySelector(".hi");
 
 if(document.cookie.indexOf('user=') === -1) {
     state.textContent = 'Login';
