@@ -13,7 +13,7 @@ function checkPW()
         alert("아이디는 5자 이상이어야 합니다.");
         return false;
     }
-    else if(!regexPw.test(regisPw.value))
+    else if(!regexPw.test(regisPw.value) || regisPw.value.length < 8)
     {
         alert("8~20자 공백을 제외한 영문 대소문자, 숫자, 특수문자를 사용하세요.");
         return false;
