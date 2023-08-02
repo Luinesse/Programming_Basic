@@ -26,31 +26,24 @@
                     }
 
                     ['title', 'article', 'username', 'boardDate'].forEach((key) => {
-                        const element = document.createElement('h3');
-                        if(key === 'title') {
-                            const hStyle = {
-                                overflow: 'hidden',
-                                whiteSpace: 'nowrap',
-                                textOverflow: 'ellipsis',
-                                width: '25%'
-                            };
-
-                            for(const [key, value] of Object.entries(hStyle)) {
-                                element.style[key] = value;
-                            }
+                        let name;
+                        if(key === title) {
+                            name = 'h3';
                         } else {
-                            element = document.createElement('p');
-                            const pStyle = {
-                                overflow: 'hidden',
-                                whiteSpace: 'nowrap',
-                                textOverflow: 'ellipsis',
-                                width: '25%'
-                            };
-
-                            for(const [key, value] of Object.entries(pStyle)) {
-                                element.style[key] = value;
-                            }
+                            name = 'p'
                         }
+                        const element = document.createElement(name);
+                        const hStyle = {
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                            width: '25%'
+                        };
+
+                        for(const [key, value] of Object.entries(hStyle)) {
+                            element.style[key] = value;
+                        }
+                        
                         if (key === 'boardDate') {
                             const dateValue = row[key].substring(0, 10);
                             element.textContent = dateValue;
