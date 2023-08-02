@@ -21,4 +21,4 @@ function checkPW(event)
     }
 }
 
-regisBut.addEventListener("submit",checkPW);
+regisForm.addEventListener("submit",checkPW);
