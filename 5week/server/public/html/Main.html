@@ -15,6 +15,15 @@
                 const board = document.querySelector('.article');
                 res.forEach((row) => {
                     const divCell = document.createElement('div');
+                    const divStyle = {
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                    };
+
+                    for(const [key, value] of Object.entries(style)) {
+                        divCell.style[key] = value;
+                    }
+
                     ['title', 'article', 'username', 'boardDate'].forEach((key) => {
                         const element = document.createElement('p');
                         if (key === 'boardDate') {
