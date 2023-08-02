@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/Main.css">
+    <link rel="stylesheet" href="../css/Main.css">
     <script>
         fetch('https://luinesse.store/api')
             .then((res) => res.json())
@@ -25,6 +25,8 @@
                         }
                         tr.appendChild(cell);
                     });
+                    const hr = document.createElement('hr');
+                    table.appendChild(hr);
                     table.appendChild(tr);
                 });
             });
