@@ -1,0 +1,11 @@
+[Unit]
+Description= index.js online
+
+[Service]
+ExecStart = /root/Programming_Basic/5week/server/index.js
+Restart=always
+Group=nogroup
+WorkingDirectory= /root/Programming_Basic/5week/server
+
+[Install]
+WantedBy = multi-user.target
