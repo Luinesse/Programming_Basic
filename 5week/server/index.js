@@ -1,4 +1,4 @@
-#![/root/Programming_Basic/5week/server]
+#!/usr/bin/node
 
 const express = require('express');
 const mysql = require('mysql');
