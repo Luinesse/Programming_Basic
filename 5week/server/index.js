@@ -31,7 +31,7 @@ app.use(express.static('public'));
 
 app.use(
 	cors({
-		origin : 'http://54.174.107.46:3000',
+		origin : 'https://luinesse.store',
 		credentials : true
 	})
 );
