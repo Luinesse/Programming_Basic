@@ -17,8 +17,12 @@
                     const tr = document.createElement('tr');
                     ['title', 'article', 'username', 'boardDate'].forEach((key) => {
                         const cell = document.createElement('td');
-                        row[key].boardDate = row[key].boardDate.split('T')[0];
-                        cell.textContent = row[key];
+                        if (key === 'boardDate') {
+                            const dateValue = row[key].substring(0, 10);
+                            cell.textContent = dateValue;
+                        } else {
+                            cell.textContent = row[key];
+                        }
                         tr.appendChild(cell);
                     });
                     table.appendChild(tr);
