@@ -5,6 +5,17 @@ const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
+const bid = document.location.pathname.split('/')[3];
+
+fetch(`/board/api/${bid}`)
+.then(res => res.json())
+.then(myJson => {
+    const title = document.querySelector('.read_title');
+    const contents = document.querySelector('.read_article');
+    title.textContent = myJson.title;
+    contents.textContent = myJson.contents;
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
