@@ -37,7 +37,8 @@
                             overflow: 'hidden',
                             whiteSpace: 'nowrap',
                             textOverflow: 'ellipsis',
-                            width: '25%'
+                            width: '25%',
+                            textAlign: 'center'
                         };
 
                         for(const [key, value] of Object.entries(hStyle)) {
@@ -53,7 +54,7 @@
                         divCell.appendChild(element);
                     });
                     const hr = document.createElement('hr');
-                    hr.style.width = '1400vw';
+                    hr.style.width = '1000px';
                     board.appendChild(divCell);
                     board.appendChild(hr);
                 });
