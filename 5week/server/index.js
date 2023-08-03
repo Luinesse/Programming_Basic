@@ -127,6 +127,10 @@ app.get('/write',(req, res) => {
 		res.send('<script type="text/javascript">alert("로그인 후 이용해 주세요."); location.href="/";</script>');
 });
 
+app.get('/board', (req, res) => {
+	res.sendFile(path.join(__dirname, './public', 'html', 'Board.html'));
+});
+
 app.get('/logout',(req,res) => {
 	req.session.destroy((err) => {
 		if(err)
