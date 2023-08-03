@@ -54,9 +54,7 @@
                             for(const [key, value] of Object.entries(linkStyle)) {
                                 link.style[key] = value;
                             }
-                            ['bid'].forEach((key) => {
-                                link.href = '/board/csr/' + key;
-                            });
+                            link.href = '/board';
                             link.textContent = row[key];
                             element.appendChild(link);
                         } else if (key === 'boardDate') {

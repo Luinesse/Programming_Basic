@@ -82,16 +82,3 @@
     <script src="../js/Board.js" defer=""></script>
 </body>
 </html>
-
-<script>
-    const bid = document.location.pathname.split('/')[3];
-
-    fetch(`/board/api/${bid}`)
-    .then(res => res.json())
-    .then(myJson => {
-        const title = document.querySelector('.read_title');
-        const contents = document.querySelector('.read_article');
-        title.textContent = myJson.title;
-        contents.textContent = myJson.contents;
-    });
-</script>
