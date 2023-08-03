@@ -8,6 +8,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/Board.css">
+
+    <script>
+        const bid = document.location.pathname.split('/')[3];
+
+        fetch(`/board/api/${bid}`)
+        .then(res => res.json())
+        .then(myJson => {
+            const title = document.querySelector('.read_title');
+            const contents = document.querySelector('.read_article');
+            title.textContent = myJson.title;
+            contents.textContent = myJson.contents;
+        });
+    </script>
 </head>
 <body class="fade">
     <div class="loading-overlay">
