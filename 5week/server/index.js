@@ -128,9 +128,11 @@ app.get('/write',(req, res) => {
 });
 
 app.get('/board/api/:bid', (req, res) => {
-	console.log(req.params);
-	res.json({ title : req.params.title, contents : "test" + req.params.article });
-})
+	connection.query('SELECT title, article FROM boardInfo WHERE bid = ?', [req.params.bid], (error, results, fields) => {
+		if(error)	throw error;
+		res.json({ title : results[0].title, contents : results[0].article });
+	});
+});
 
 app.get('/board/csr/:bid', (req, res) => {
 	res.sendFile(path.join(__dirname, './public', 'html', 'Board.html'));
