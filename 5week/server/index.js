@@ -127,7 +127,11 @@ app.get('/write',(req, res) => {
 		res.send('<script type="text/javascript">alert("로그인 후 이용해 주세요."); location.href="/";</script>');
 });
 
-app.get('/board', (req, res) => {
+app.get('/board/api/:bid', (req, res) => {
+	res.json({ title : req.params.bid, contents : "CSR" + req.params.bid });
+})
+
+app.get('/board/csr/:bid', (req, res) => {
 	res.sendFile(path.join(__dirname, './public', 'html', 'Board.html'));
 });
 
