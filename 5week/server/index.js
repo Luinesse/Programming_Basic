@@ -128,7 +128,7 @@ app.get('/write',(req, res) => {
 });
 
 app.get('/board/api/:bid', (req, res) => {
-	res.json({ title : req.params.title, contents : req.params.article });
+	res.json({ title : req.params.title, contents : "test" + req.params.article });
 })
 
 app.get('/board/csr/:bid', (req, res) => {
