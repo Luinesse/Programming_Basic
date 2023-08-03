@@ -128,6 +128,7 @@ app.get('/write',(req, res) => {
 });
 
 app.get('/board/api/:bid', (req, res) => {
+	console.log(req.params);
 	res.json({ title : req.params.title, contents : "test" + req.params.article });
 })
 
