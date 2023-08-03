@@ -107,6 +107,10 @@ app.get('/api',(req, res) => {
 	});
 });
 
+app.get('board/api/:bid', (req, res) => {
+	res.json({ read_title : req.params.bid, read_article : "CSR" + req.params.bid });
+})
+
 app.get('/',(req, res) => {
 	console.log(req.session);
 	res.sendFile(path.join(__dirname, './public', 'html', 'Main.html'));
