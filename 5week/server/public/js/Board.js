@@ -12,8 +12,8 @@ fetch(`/board/api/${bid}`)
 .then(myJson => {
     const rTitle = document.querySelector('.read_title');
     const rArticle = document.querySelector('.read_article');
-    rTitle.textContent = myJson.read_title;
-    rArticle.textContent = myJson.read_Article;
+    rTitle.textContent = myJson.title;
+    rArticle.textContent = myJson.contents;
 });
 
 

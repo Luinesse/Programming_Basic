@@ -108,7 +108,7 @@ app.get('/api',(req, res) => {
 });
 
 app.get('board/api/:bid', (req, res) => {
-	res.json({ read_title : req.params.bid, read_article : "CSR" + req.params.bid });
+	res.json({ title : req.params.bid, contents : "CSR" + req.params.bid });
 })
 
 app.get('/',(req, res) => {
