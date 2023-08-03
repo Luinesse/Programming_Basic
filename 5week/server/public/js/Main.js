@@ -6,6 +6,11 @@ const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
 
+document.addEventListener('DOMContentLoaded', () => {
+    const loadingOverlay = document.querySelector('.loading-overlay');
+    loadingOverlay.style.display = 'none';
+});
+
 if(document.cookie.indexOf('user=') === -1) {
     state.textContent = 'Login';
     state.addEventListener('click', e => {
