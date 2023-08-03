@@ -5,6 +5,11 @@ const regisPw = document.getElementById('register-pw');
 const regisBut = document.getElementById('register-btn');
 const regisForm = document.getElementById('register-form');
 
+document.addEventListener('DOMContentLoaded', () => {
+    const loadingOverlay = document.querySelector('.loading-overlay');
+    loadingOverlay.style.display = 'none';
+});
+
 function checkPW(event)
 {
     var regexPw = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)\{\}\[\]\-_=\+\\|;:'"<>,\./\?]{8,20}$/;
