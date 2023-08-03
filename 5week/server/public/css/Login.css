@@ -30,10 +30,16 @@ html {
 }
 
 body {
+    opacity: 1;
+    transition-duration: 2s;
     background-color: #FAFAFA;
     margin: 0px;
     color: #262626;
     box-sizing: border-box;
+}
+
+body.fade {
+    opacity: 0;
 }
 
 .login-articles {

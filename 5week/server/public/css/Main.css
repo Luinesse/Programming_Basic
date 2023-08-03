@@ -32,9 +32,15 @@ html {
 }
 
 body {
+    opacity: 1;
+    transition-duration: 2s;
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+
+body.fade {
+    opacity: 0;
 }
 
 h1 {

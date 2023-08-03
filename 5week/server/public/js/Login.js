@@ -6,6 +6,12 @@ const loginBtn = document.getElementById('login-button');
 const regisBtn = document.getElementById('register');
 
 document.addEventListener('DOMContentLoaded', () => {
+    window.setTimeout(() => {
+        document.body.classList.remove('fade');
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
     const loadingOverlay = document.querySelector('.loading-overlay');
     loadingOverlay.style.display = 'none';
     document.body.style.overflow = 'auto';

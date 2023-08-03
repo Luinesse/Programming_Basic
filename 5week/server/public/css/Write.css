@@ -29,6 +29,15 @@ html {
     font-family: 'Nanum Gothic', sans-serif;
 }
 
+body {
+    opacity: 1;
+    transition-duration: 2s;
+}
+
+body.fade {
+    opacity: 0;
+}
+
 h1 {
     font-size: 40px;
     color:azure;

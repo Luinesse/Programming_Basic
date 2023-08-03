@@ -7,6 +7,12 @@ const wstate = document.querySelector(".write-text");
 const wuserhi = document.querySelector(".write-hi");
 
 document.addEventListener('DOMContentLoaded', () => {
+    window.setTimeout(() => {
+        document.body.classList.remove('fade');
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
     const loadingOverlay = document.querySelector('.loading-overlay');
     loadingOverlay.style.display = 'none';
     document.body.style.overflow = 'auto';
