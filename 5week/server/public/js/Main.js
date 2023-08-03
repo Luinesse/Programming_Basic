@@ -9,6 +9,7 @@ const userhi = document.querySelector(".hi");
 document.addEventListener('DOMContentLoaded', () => {
     const loadingOverlay = document.querySelector('.loading-overlay');
     loadingOverlay.style.display = 'none';
+    document.body.style.overflow = 'auto';
 });
 
 if(document.cookie.indexOf('user=') === -1) {

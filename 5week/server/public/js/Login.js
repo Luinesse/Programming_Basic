@@ -8,6 +8,7 @@ const regisBtn = document.getElementById('register');
 document.addEventListener('DOMContentLoaded', () => {
     const loadingOverlay = document.querySelector('.loading-overlay');
     loadingOverlay.style.display = 'none';
+    document.body.style.overflow = 'auto';
 });
 
 function moveToRegister() {

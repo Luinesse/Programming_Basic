@@ -8,6 +8,7 @@ const regisForm = document.getElementById('register-form');
 document.addEventListener('DOMContentLoaded', () => {
     const loadingOverlay = document.querySelector('.loading-overlay');
     loadingOverlay.style.display = 'none';
+    document.body.style.overflow = 'auto';
 });
 
 function checkPW(event)
