@@ -61,6 +61,8 @@ function deleteAct() {
             method: 'POST',
             body: formData
         });
+    } else {
+        alert("전송 실패");
     }
 }
 
