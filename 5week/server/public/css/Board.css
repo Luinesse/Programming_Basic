@@ -43,7 +43,7 @@ body.fade {
     opacity: 0;
 }
 
-h1 {
+#goMain {
     font-size: 40px;
     color:azure;
 }
@@ -146,6 +146,22 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.read_title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.input-title {
+    font-size: 30px;
+}
+
+.read_article {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .last-section {
