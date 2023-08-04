@@ -192,6 +192,7 @@ img {
     text-decoration: none;
     font-weight: 600;
     transition: 0.25s;
+    left: 20px;
     right: 20px;
     bottom: 10px;
 }
