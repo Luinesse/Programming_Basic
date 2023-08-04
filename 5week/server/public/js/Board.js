@@ -2,9 +2,21 @@
 
 const mainPg = document.getElementById('Main-page');
 const titleH = document.getElementById("goMain");
-const writePg = document.getElementById('revise-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
+const listB = document.getElementById("list-btn");
+const reviseB = document.getElementById("revise-btn");
+const deleteB = document.getElementById("delete-btn");
+const bid = document.location.pathname.split('/')[3];
+
+fetch(`/board/api/${bid}`)
+.then(res => res.json())
+.then(myJson => {
+    const title = document.querySelector('.input-title');
+    const contents = document.querySelector('.input-article');
+    title.textContent = myJson.title;
+    contents.textContent = myJson.contents;
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
@@ -32,9 +44,24 @@ else {
     });
 }
 
-//이거 글 수정으로 수정해야함.
-function moveToWrite() {
-    location.href = "/write";
+//글 삭제, 글 수정, 목록으로 가기 버튼
+
+function deleteAct() {
+    let input = confirm('정말로 게시글을 삭제하시겠습니까 ?');
+    if(input) {
+        let value = document.cookie.split('user=')[1].split(';')[0];
+        let delPw = prompt('비밀번호를 입력해주세요.');
+
+        const formData = new FormData();
+        formData.append(value);
+        formData.append(delPw);
+        formData.append(bid);
+
+        const res = fetch('/delete', {
+            method: 'POST',
+            body: formData
+        });
+    }
 }
 
 function moveToMain() {
@@ -50,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+deleteB.addEventListener("click",deleteAct);
+listB.addEventListener("click",moveToMain);
 mainPg.addEventListener("click",moveToMain);
-writePg.addEventListener("click",moveToWrite);
 titleH.addEventListener("click",moveToMain);

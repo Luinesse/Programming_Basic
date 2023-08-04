@@ -100,6 +100,26 @@ app.post('/write', (req, res) => {
 	}
 });
 
+app.post('/delete', (req, res) => {
+	const { value, delPw, bid } = req.body;
+
+	if(value && delPw && bid) {
+		connection.query('SELECT id, pw FROM userInfo WHERE id = ? AND pw = ?', [value, delPw], (error, results, fields) => {
+			if(error)	throw error;
+			if(results.length > 0) {
+				connection.query('DELETE FROM boardInfo WHERE bid = ?', [bid], (error, results, fields) => {
+					if(error)	throw error2;
+					res.send('<script type="text/javascript">alert("삭제가 완료됐습니다."); location.replace("/");</script>');
+				});
+			} else {
+				res.send('<script type="text/javascript">alert("비밀번호를 다시 확인해 주세요."); location.replace("/");</script>');
+			}
+		});
+	} else {
+		res.send('<script type="text/javascript">alert("입력되지 않은 값이 있습니다."); location.replace("/");</script>');
+	}
+});
+
 app.get('/api',(req, res) => {
 	connection.query('SELECT * FROM boardInfo', (error, rows) => {
 		if (error) throw error;
