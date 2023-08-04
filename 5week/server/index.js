@@ -109,20 +109,14 @@ app.post('/delete', (req, res) => {
 			if(results[0].username == user) {
 				connection.query('DELETE FROM boardInfo WHERE bid = ?', [boardId], (error, results, fields) => {
 					if(error)	throw error2;
-					const responseScript = '<script type="text/javascript">alert("삭제가 완료됐습니다."); location.replace("/");</script>';
-					res.writeHead(200, { 'Content-Type' : 'text/html' });
-					res.end(responseScript);
+					res.json({ success : true });
 				});
 			} else {
-				const responseScript = '<script type="text/javascript">alert("게시물 삭제는 게시물 작성자만 가능합니다."); location.replace("/");</script>';
-				res.writeHead(200, { 'Content-Type' : 'text/html' });
-				res.end(responseScript);
+				res.json({ success : false });
 			}
 		});
 	} else {
-		const responseScript = '<script type="text/javascript">alert("잘못된 접근입니다. 다시 시도해주세요."); location.replace("/");</script>';
-		res.writeHead(200, { 'Content-Type' : 'text/html' });
-		res.end(responseScript);
+		res.json({ success : false });
 	}
 });
 

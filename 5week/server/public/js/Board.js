@@ -62,9 +62,14 @@ function deleteAct() {
             },
             body: JSON.stringify(reqData),
         })
-        .then(res => res.text())
+        .then(res => res.json())
         .then(data => {
-            console.log(data);
+            if(data.success) {
+                alert("삭제가 완료됐습니다.");
+                location.replace("/");
+            } else {
+                alert("사용자의 게시물이 아니거나 로그인 상태를 확인해주세요.");
+            }
         })
         .catch(error => {
             console.error("ERROR : ", error);
