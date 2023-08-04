@@ -101,7 +101,7 @@ app.post('/write', (req, res) => {
 });
 
 app.post('/delete', (req, res) => {
-	const { bid, user } = req.body;
+	const { user, boardId } = req.body;
 
 	if(bid && user) {
 

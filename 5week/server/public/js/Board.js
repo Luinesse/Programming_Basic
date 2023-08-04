@@ -50,13 +50,17 @@ function deleteAct() {
     if(document.cookie.indexOf('user=') === -1) {
         alert("로그인 후 이용해 주세요.");
     } else {
-        const reqData = new FormData();
-        reqData.append("bid", bid);
-        reqData.append("user",document.cookie.split('user=')[1].split(';')[0]);
+        const reqData = {
+            user : document.cookie.split('user=')[1].split(';')[0],
+            boardId : bid,
+        };
 
         fetch('/delete', {
             method: 'POST',
-            body: reqData
+            headers: {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify(data),
         })
         .then(res => res.text())
         .then(data => {
