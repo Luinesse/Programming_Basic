@@ -115,7 +115,7 @@ app.post('/delete', (req, res) => {
 			}
 		});
 	} else {
-		res.send(req.body);
+		res.send(req.params);
 	}
 });
 
