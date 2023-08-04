@@ -101,8 +101,8 @@ app.post('/write', (req, res) => {
 });
 
 app.post('/delete', (req, res) => {
-	const { value, delPw, bid } = req.body;
-	if(value && delPw && bid) {
+	const { id, delPw, bid } = req.body;
+	if(id && delPw && bid) {
 		connection.query('SELECT id, pw FROM userInfo WHERE id = ? AND pw = ?', [value, delPw], (error, results, fields) => {
 			if(error)	throw error;
 			if(results.length > 0) {

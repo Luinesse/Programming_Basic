@@ -56,7 +56,7 @@ function deleteAct() {
             let delPw = prompt('비밀번호를 입력해주세요.');
 
             const formData = new FormData();
-            formData.append('value', value);
+            formData.append('id', value);
             formData.append('delPw', delPw);
             formData.append('bid', bid);
 
@@ -64,7 +64,7 @@ function deleteAct() {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
                 console.log(data);
             })
