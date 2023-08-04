@@ -153,8 +153,7 @@ img {
     display: flex;
     flex-direction: column;
     align-items: start;
-    width: 60%;
-    height: 10%;
+    width: 50%;
 }
 
 .input-title {
