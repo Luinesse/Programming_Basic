@@ -83,8 +83,8 @@
     fetch(`/board/api/${bid}`)
     .then(res => res.json())
     .then(myJson => {
-        const title = document.querySelector('.read_title');
-        const contents = document.querySelector('.read_article');
+        const title = document.querySelector('.input-title');
+        const contents = document.querySelector('.input-article');
         title.textContent = myJson.title;
         contents.textContent = myJson.contents;
     });
