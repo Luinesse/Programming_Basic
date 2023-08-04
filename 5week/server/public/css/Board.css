@@ -144,8 +144,12 @@ img {
 .article {
     height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
+}
+
+.article-gap {
+    width: 20%;
 }
 
 .read_title {
