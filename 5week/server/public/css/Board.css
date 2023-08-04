@@ -150,7 +150,7 @@ img {
 
 .read_title {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     width: 60%;
     height: 10%;
@@ -158,14 +158,11 @@ img {
 
 .input-title {
     font-size: 30px;
+    text-align: start;
 }
 
-.read_article {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60%;
-    height: 10%;
+.input-article {
+    text-align: start;
 }
 
 .last-section {
