@@ -101,21 +101,12 @@ app.post('/write', (req, res) => {
 });
 
 app.post('/delete', (req, res) => {
-	const { id, delPw, bid } = req.body;
-	if(id && delPw && bid) {
-		connection.query('SELECT id, pw FROM userInfo WHERE id = ? AND pw = ?', [value, delPw], (error, results, fields) => {
-			if(error)	throw error;
-			if(results.length > 0) {
-				connection.query('DELETE FROM boardInfo WHERE bid = ?', [bid], (error, results, fields) => {
-					if(error)	throw error2;
-					res.send('<script type="text/javascript">alert("삭제가 완료됐습니다."); location.replace("/");</script>');
-				});
-			} else {
-				res.send('<script type="text/javascript">alert("비밀번호를 다시 확인해 주세요."); location.replace("/");</script>');
-			}
-		});
+	const { bid, user } = req.body;
+
+	if(bid && user) {
+
 	} else {
-		res.send(req.params);
+		res.send('값 없다.');
 	}
 });
 

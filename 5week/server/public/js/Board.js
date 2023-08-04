@@ -47,33 +47,24 @@ else {
 //글 삭제, 글 수정, 목록으로 가기 버튼
 
 function deleteAct() {
-    const input = confirm('정말로 게시글을 삭제하시겠습니까 ?');
-    if(input) {
-        if(document.cookie.indexOf('user=') === -1) {
-            alert("로그인 후 이용해 주세요.");
-        } else {
-            const value = document.cookie.split('user=')[1].split(';')[0];
-            const delPw = prompt('비밀번호를 입력해주세요.');
-
-            const formData = new FormData();
-            formData.append('id', value);
-            formData.append('delPw', delPw);
-            formData.append('bid', bid);
-
-            fetch('https://luinesse.store/delete', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error : ', error);
-            });
-        }
+    if(document.cookie.indexOf('user=') === -1) {
+        alert("로그인 후 이용해 주세요.");
     } else {
-        alert("전송 실패");
+        const reqData = new FormData();
+        reqData.append("bid", bid);
+        reqData.append("user",document.cookie.split('user=')[1].split(';')[0]);
+
+        fetch('/delete', {
+            method: 'POST',
+            body: reqData
+        })
+        .then(res => res.text())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error("ERROR : ", error);
+        });
     }
 }
 
