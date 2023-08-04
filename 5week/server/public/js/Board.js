@@ -77,6 +77,17 @@ function deleteAct() {
     }
 }
 
+function reviseAct() {
+    if(document.cookie.indexOf('user=') === -1) {
+        alert("로그인 후 이용해 주세요.");
+    } else {
+        const reqData = {
+            user : document.cookie.split('user=')[1].split(';')[0],
+            boardId : bid,
+        };
+    }
+}
+
 function moveToMain() {
     location.href = "/";
 }
@@ -90,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+reviseB.addEventListener("click",reviseAct);
 deleteB.addEventListener("click",deleteAct);
 listB.addEventListener("click",moveToMain);
 mainPg.addEventListener("click",moveToMain);
