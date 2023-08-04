@@ -60,6 +60,13 @@ function deleteAct() {
         fetch('/delete', {
             method: 'POST',
             body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error : ', error);
         });
     } else {
         alert("전송 실패");
