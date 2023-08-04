@@ -53,11 +53,11 @@ function deleteAct() {
         let delPw = prompt('비밀번호를 입력해주세요.');
 
         const formData = new FormData();
-        formData.append(value);
-        formData.append(delPw);
-        formData.append(bid);
+        formData.append('value', value);
+        formData.append('delPw', delPw);
+        formData.append('bid', bid);
 
-        const res = fetch('/delete', {
+        fetch('/delete', {
             method: 'POST',
             body: formData
         });
