@@ -103,7 +103,7 @@ app.post('/write', (req, res) => {
 app.post('/delete', (req, res) => {
 	const { user, boardId } = req.body;
 
-	if(bid && user) {
+	if(boardId && user) {
 
 	} else {
 		res.send('값 없다.');
