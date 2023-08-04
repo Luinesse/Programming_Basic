@@ -102,7 +102,9 @@ app.post('/write', (req, res) => {
 
 app.post('/delete', (req, res) => {
 	const { value, delPw, bid } = req.body;
-
+	console.log(value);
+	console.log(delPw);
+	console.log(bid);
 	if(value && delPw && bid) {
 		connection.query('SELECT id, pw FROM userInfo WHERE id = ? AND pw = ?', [value, delPw], (error, results, fields) => {
 			if(error)	throw error;
@@ -116,7 +118,7 @@ app.post('/delete', (req, res) => {
 			}
 		});
 	} else {
-		res.send(value);
+		res.send('<script type="text/javascript">alert("입력되지 않은 값이 있습니다."); location.replace("/");</script>');
 	}
 });
 
