@@ -146,8 +146,8 @@ app.get('/logout',(req,res) => {
 			res.clearCookie('user');
 			res.redirect("/");
 		}
-	})
-})
+	});
+});
 
 app.listen(port, () => {
 	console.log('Example app listening on port ' + port);
