@@ -142,16 +142,18 @@ img {
 }
 
 .article {
-    height: 95%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .read_title {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 10%;
 }
 
 .input-title {
@@ -160,8 +162,10 @@ img {
 
 .read_article {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 10%;
 }
 
 .last-section {
