@@ -60,7 +60,7 @@ function deleteAct() {
             headers: {
                 'Content-Type' : 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(reqData),
         })
         .then(res => res.text())
         .then(data => {
