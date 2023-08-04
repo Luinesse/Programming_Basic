@@ -102,9 +102,6 @@ app.post('/write', (req, res) => {
 
 app.post('/delete', (req, res) => {
 	const { value, delPw, bid } = req.body;
-	console.log(value);
-	console.log(delPw);
-	console.log(bid);
 	if(value && delPw && bid) {
 		connection.query('SELECT id, pw FROM userInfo WHERE id = ? AND pw = ?', [value, delPw], (error, results, fields) => {
 			if(error)	throw error;
