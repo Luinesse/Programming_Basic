@@ -67,9 +67,6 @@ function deleteAct() {
             .then(response => response.text())
             .then(data => {
                 console.log(data);
-                console.log(value);
-                console.log(delPw);
-                console.log(bid);
             })
             .catch(error => {
                 console.error('Error : ', error);
