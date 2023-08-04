@@ -116,8 +116,7 @@ app.post('/delete', (req, res) => {
 			}
 		});
 	} else {
-		res.send('<script type="text/javascript">alert("입력되지 않은 값이 있습니다."); location.replace("/");</script>');
-		console.log(value,delPw,bid);
+		res.send(value);
 	}
 });
 
