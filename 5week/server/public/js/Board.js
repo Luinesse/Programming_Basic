@@ -2,7 +2,7 @@
 
 const mainPg = document.getElementById('Main-page');
 const titleH = document.getElementById("goMain");
-const writePg = document.getElementById('write-btn');
+const writePg = document.getElementById('revise-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
 
@@ -32,6 +32,7 @@ else {
     });
 }
 
+//이거 글 수정으로 수정해야함.
 function moveToWrite() {
     location.href = "/write";
 }

@@ -153,16 +153,7 @@ img {
     justify-content: center;
 }
 
-.section-page {
-    padding: 0px 0px 0px 0px;
-    width: 60%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.write-button {
+.revise-button {
     padding: 0px 0px 0px 0px;
     width: 20%;
     display: flex;
