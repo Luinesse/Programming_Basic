@@ -49,9 +49,11 @@ else {
 function deleteAct() {
     let input = confirm('정말로 게시글을 삭제하시겠습니까 ?');
     if(input) {
-        let value = document.cookie.split('user=')[1].split(';')[0];
-        if(value === "") {
-            alert("로그인 후 이용해 주세요.");
+        let value;
+        if(!document.cookie.split('user=')[1].split(';')[0]) {
+            alert("로그인 후 이용해주세요.");
+        } else {
+            value = document.cookie.split('user=')[1].split(';')[0];
         }
         let delPw = prompt('비밀번호를 입력해주세요.');
 
