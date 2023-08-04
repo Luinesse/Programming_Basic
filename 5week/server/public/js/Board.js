@@ -60,7 +60,7 @@ function deleteAct() {
             formData.append('delPw', delPw);
             formData.append('bid', bid);
 
-            fetch('/delete', {
+            fetch('https://luinesse.store/delete', {
                 method: 'POST',
                 body: formData
             })
