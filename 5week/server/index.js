@@ -120,6 +120,23 @@ app.post('/delete', (req, res) => {
 	}
 });
 
+app.post('/revise', (req, res) => {
+	const { user, boardId } = req.body;
+
+	if(boardId && user) {
+		connection.query('SELECT username FROM boardInfo WHERE bid = ?', [boardId], (error, results, fields) => {
+			if(error)	throw error;
+			if(results[0].username == user) {
+				res.json({ success : true });
+			} else {
+				res.json({ success : false });
+			}
+		});
+	} else {
+		res.json({ success : false });
+	}
+});
+
 app.get('/api',(req, res) => {
 	connection.query('SELECT * FROM boardInfo', (error, rows) => {
 		if (error) throw error;
@@ -156,6 +173,17 @@ app.get('/board/api/:bid', (req, res) => {
 
 app.get('/board/csr/:bid', (req, res) => {
 	res.sendFile(path.join(__dirname, './public', 'html', 'Board.html'));
+});
+
+app.get('revise/api/:bid', (req, res) => {
+	connection.query('SELECT title, article FROM boardInfo WHERE bid = ?', [req.params.bid], (error, results, fields) => {
+		if(error)	throw error;
+		res.json({ title : results[0].title, contents : results[0].article });
+	});
+});
+
+app.get('/revise/csr/:bid', (req, res) => {
+	res.sendFile(path.join(__dirname, './public', 'html', 'Revise.html'));
 });
 
 app.get('/logout',(req,res) => {

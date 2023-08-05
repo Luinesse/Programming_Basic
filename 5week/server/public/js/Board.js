@@ -85,6 +85,25 @@ function reviseAct() {
             user : document.cookie.split('user=')[1].split(';')[0],
             boardId : bid,
         };
+
+        fetch('/revise', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify(reqData),
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.success) {
+                location.href = "/revise/csr" + bid;
+            } else {
+                alert("사용자의 게시물이 아니거나 로그인 상태를 확인해주세요.");
+            }
+        })
+        .catch(error => {
+            console.error("ERROR : ", error);
+        });
     }
 }
 
