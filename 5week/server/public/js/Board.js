@@ -96,7 +96,7 @@ function reviseAct() {
         .then(res => res.json())
         .then(data => {
             if(data.success) {
-                location.href = "/revise/csr" + bid;
+                location.href = "/revise/csr/" + bid;
             } else {
                 alert("사용자의 게시물이 아니거나 로그인 상태를 확인해주세요.");
             }
