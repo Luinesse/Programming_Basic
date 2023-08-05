@@ -11,7 +11,7 @@ fetch(`/revise/api/${bid}`)
 .then(res => res.json())
 .then(myJson => {
     const title = document.querySelector('.title-text');
-    const contents = document.querySelector('.write-text');
+    const contents = document.querySelector('.wrote-article');
     title.innerHTML = myJson.title;
     contents.innerHTML = myJson.contents;
 });
