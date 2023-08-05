@@ -126,10 +126,11 @@ app.post('/revise', (req, res) => {
 	if(wrote_title && wrote_article && bid) {
 		connection.query('UPDATE boardInfo SET title = ?, article = ? WHERE bid = ?', [wrote_title, wrote_article, bid], (error, results, fields) => {
 			if(error)	throw error;
-			res.json({ success : true });
+			res.send('<script type="text/javascript">alert("수정이 완료됐습니다."); location.replace("/");</script>');
 		});
 	} else {
-		res.json({ success : false, isBid : bid, isTitle : wrote_title, isArticle : wrote_article });
+		console.log(req.body);
+		res.send('<script type="text/javascript">alert("수정에 실패했습니다."); location.replace("/");</script>');
 	}
 });
 
