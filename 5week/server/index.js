@@ -129,7 +129,7 @@ app.post('/revise', (req, res) => {
 			res.json({ success : true });
 		});
 	} else {
-		res.json({ success : false });
+		res.json({ success : false, isBid : bid, isTitle : wrote_title, isArticle : wrote_article });
 	}
 });
 
