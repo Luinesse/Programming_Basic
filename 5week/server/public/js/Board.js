@@ -86,7 +86,7 @@ function reviseAct() {
             boardId : bid,
         };
 
-        fetch('/revise', {
+        fetch('/revisereq', {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json',

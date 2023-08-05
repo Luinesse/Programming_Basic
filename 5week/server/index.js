@@ -121,6 +121,19 @@ app.post('/delete', (req, res) => {
 });
 
 app.post('/revise', (req, res) => {
+	const { bid, wrote_title, wrote_article } = req.body;
+
+	if(wrote_title && wrote_article && bid) {
+		connection.query('UPDATE boardInfo SET title = ?, article = ? WHERE bid = ?', [wrote_title, wrote_article, bid], (error, results, fields) => {
+			if(error)	throw error;
+			res.json({ success : true });
+		});
+	} else {
+		res.json({ success : false });
+	}
+});
+
+app.post('/revisereq', (req, res) => {
 	const { user, boardId } = req.body;
 
 	if(boardId && user) {
