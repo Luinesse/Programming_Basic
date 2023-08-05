@@ -12,8 +12,8 @@ fetch(`/revise/api/${bid}`)
 .then(myJson => {
     const title = document.querySelector('.title-text');
     const contents = document.querySelector('.write-text');
-    title.textContent = myJson.title;
-    contents.textContent = myJson.contents;
+    title.innerHTML = myJson.title;
+    contents.innerHTML = myJson.contents;
 });
 
 document.addEventListener('DOMContentLoaded', () => {
