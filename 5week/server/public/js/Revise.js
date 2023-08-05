@@ -5,10 +5,10 @@ const titleH = document.getElementById("goMain");
 const uploadBtn = document.getElementById("upload-btn");
 const wstate = document.querySelector(".write-text");
 const wuserhi = document.querySelector(".write-hi");
-const bidReq = document.querySelector(".bidValue");
+const bidReq = document.getElementById(".bidValue");
 const bid = document.location.pathname.split('/')[3];
 
-bidReq.innerHTML = bid;
+bidReq.innerText = bid;
 
 fetch(`/revise/api/${bid}`)
 .then(res => res.json())
