@@ -8,7 +8,7 @@ const wuserhi = document.querySelector(".write-hi");
 const bidReq = document.querySelector(".bidValue");
 const bid = document.location.pathname.split('/')[3];
 
-bidReq.textContent = bid;
+bidReq.innerHTML = bid;
 
 fetch(`/revise/api/${bid}`)
 .then(res => res.json())
