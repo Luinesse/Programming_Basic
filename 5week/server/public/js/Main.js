@@ -77,6 +77,7 @@ function fetchPage() {
                         pageIdx++;
                         cnt = 1;
                     }
+                    console.log(pageIdx);
                 });
         });
 }
