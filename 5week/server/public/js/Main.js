@@ -12,8 +12,8 @@ fetch(`https://luinesse.store/api/${page}`)
             .then((res) => {
                 const board = document.querySelector('.article');
                 res.forEach((row) => {
-                    const pageIdx = 1;
-                    const cnt = 1;
+                    let pageIdx = 1;
+                    let cnt = 1;
                     const divCell = document.createElement('div');
                     const style = {
                         display: 'flex',
