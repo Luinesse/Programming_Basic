@@ -66,16 +66,16 @@ fetch(`https://luinesse.store/api/${page}`)
                             element.textContent = row[key];
                         }
                         divCell.appendChild(element);
-                        cnt++;
-                        if(cnt == 10) {
-                            pageIdx++;
-                            cnt = 1;
-                        }
                     });
                     const hr = document.createElement('hr');
                     hr.style.width = '1400px';
                     board.appendChild(divCell);
                     board.appendChild(hr);
+                    cnt++;
+                    if(cnt == 10) {
+                        pageIdx++;
+                        cnt = 1;
+                    }
                 });
                 const pageClass = document.querySelector(".pageNum");
                 for(var i = 1; i <= pageIdx; i++) {
