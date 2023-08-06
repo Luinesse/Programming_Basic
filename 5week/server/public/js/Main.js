@@ -5,11 +5,13 @@ const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
+const pageNumber = document.querySelector(".pageNum li");
 let page = 1;
 let pageIdx = 1;
 let cnt = 1;
 
-fetch(`https://luinesse.store/api/${page}`)
+function fetchPage() {
+    fetch(`https://luinesse.store/api/${page}`)
             .then((res) => res.json())
             .then((res) => {
                 const board = document.querySelector('.article');
@@ -92,6 +94,20 @@ fetch(`https://luinesse.store/api/${page}`)
                     pageClass.appendChild(num);
                 }
             });
+}
+
+function pageClick(event) {
+    const clickPage = parseInt(event.target.textContent);
+    page = clickPage;
+
+    fetchPage();
+}
+
+pageNumber.forEach((li) => {
+    li.addEventListener("click", pageClick);
+});
+
+fetchPage();
 
 document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
