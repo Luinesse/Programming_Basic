@@ -120,29 +120,28 @@ document.addEventListener('DOMContentLoaded', () => {
         menu.classList.toggle('open');
     });
 
-    fetchPage();
-
     const pageNumber = document.querySelectorAll(".pageNum li");
 
     pageNumber.forEach((li) => {
         li.addEventListener("click", pageClick);
     });
-    
-});
 
-if(document.cookie.indexOf('user=') === -1) {
-    state.textContent = 'Login';
-    state.addEventListener('click', e => {
-        location.href = '/login';
-    });
-}
-else {
-    userhi.textContent = document.cookie.split('user=')[1].split(';')[0] + '님 환영합니다.';
-    state.textContent = 'Logout';
-    state.addEventListener('click', e => {
-        location.replace("/logout");
-    });
-}
+    if(document.cookie.indexOf('user=') === -1) {
+        state.textContent = 'Login';
+        state.addEventListener('click', e => {
+            location.href = '/login';
+        });
+    }
+    else {
+        userhi.textContent = document.cookie.split('user=')[1].split(';')[0] + '님 환영합니다.';
+        state.textContent = 'Logout';
+        state.addEventListener('click', e => {
+            location.replace("/logout");
+        });
+    }
+
+    fetchPage();
+});
 
 function moveToWrite() {
     location.href = "/write";
