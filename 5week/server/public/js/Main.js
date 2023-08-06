@@ -70,6 +70,11 @@ fetch(`https://luinesse.store/api/${page}`)
                     hr.style.width = '1400px';
                     board.appendChild(divCell);
                     board.appendChild(hr);
+                    cnt++;
+                    if(cnt == 10) {
+                        page++;
+                        cnt = 1;
+                    }
                 });
                 const pageClass = document.querySelector(".pageNum");
                 for(var i = 1; i <= page; i++) {
@@ -84,11 +89,6 @@ fetch(`https://luinesse.store/api/${page}`)
                     }
                     num.textContent = i;
                     pageClass.appendChild(num);
-                }
-                cnt++;
-                if(cnt == 10) {
-                    page++;
-                    cnt = 1;
                 }
             });
 
