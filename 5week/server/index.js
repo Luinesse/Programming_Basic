@@ -150,9 +150,9 @@ app.post('/revisereq', (req, res) => {
 	}
 });
 
-app.get('/api',(req, res) => {
+app.get('/api/:page',(req, res) => {
 	const pageSize = 10;
-	connection.query('SELECT * FROM boardInfo', (error, rows) => {
+	connection.query('SELECT * FROM boardInfo LIMIT ?, ?', [(req.params.page - 1) * pageSize, pageSize], (error, rows) => {
 		if (error) throw error;
 		res.send(rows);
 	});
