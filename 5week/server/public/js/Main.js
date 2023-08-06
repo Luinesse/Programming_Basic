@@ -14,6 +14,15 @@ function createPageBtn() {
 
     for(let i = 1; i <= totalPages; i++) {
         const pageBtn = document.createElement("li");
+        const btnStyle = {
+            float: "left",
+            marginRight: "20px"
+        };
+
+        for(const [key, value] of Object.entries(btnStyle)) {
+            pageBtn.style[key] = value;
+        }
+
         pageBtn.textContent = i;
         pageBtn.addEventListener("click", () => {
             currentPage = i;
