@@ -12,6 +12,8 @@ fetch(`https://luinesse.store/api/${page}`)
             .then((res) => {
                 const board = document.querySelector('.article');
                 res.forEach((row) => {
+                    const pageIdx = 1;
+                    const cnt = 1;
                     const divCell = document.createElement('div');
                     const style = {
                         display: 'flex',
@@ -69,9 +71,14 @@ fetch(`https://luinesse.store/api/${page}`)
                     hr.style.width = '1400px';
                     board.appendChild(divCell);
                     board.appendChild(hr);
+                    cnt++;
+                    if(cnt == 10) {
+                        pageIdx++;
+                        cnt = 1;
+                    }
                 });
                 const pageClass = document.querySelector(".pageNum");
-                for(var i = 1; i <= page; i++) {
+                for(var i = 1; i <= pageIdx; i++) {
                     const num = document.createElement('li');
                     const listStyle = {
                         float: 'left',
