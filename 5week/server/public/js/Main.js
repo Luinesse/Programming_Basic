@@ -110,7 +110,7 @@ function initPage() {
     });
 
     const urlParams = new URLSearchParams(window.location.search);
-    currentPage = parsInt(urlParams.get('page')) || 1;
+    currentPage = parseInt(urlParams.get('page')) || 1;
 
     fetchPage();
 }
