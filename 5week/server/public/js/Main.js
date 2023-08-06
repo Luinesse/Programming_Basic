@@ -109,6 +109,9 @@ function initPage() {
         menu.classList.toggle('open');
     });
 
+    const urlParams = new URLSearchParams(window.location.search);
+    currentPage = parsInt(urlParams.get('page')) || 1;
+
     fetchPage();
 }
 
