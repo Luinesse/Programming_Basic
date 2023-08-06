@@ -96,6 +96,8 @@ function fetchPage() {
             });
 }
 
+fetchPage();
+
 function pageClick(event) {
     const clickPage = parseInt(event.target.textContent);
     page = clickPage;
@@ -106,8 +108,6 @@ function pageClick(event) {
 pageNumber.forEach((li) => {
     li.addEventListener("click", pageClick);
 });
-
-fetchPage();
 
 document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
