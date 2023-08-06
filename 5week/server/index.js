@@ -164,7 +164,7 @@ app.get('/api/posts',(req, res) => {
 		connection.query('SELECT * FROM boardInfo LIMIT ?, ?', [startIdx, perPage], (error, rows) => {
 			if (error) throw error;
 			
-			res.json({ totalPages, posts: results });
+			res.json({ totalPages, posts: rows });
 		});
 	});
 });
