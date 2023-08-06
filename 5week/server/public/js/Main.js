@@ -5,12 +5,9 @@ const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
-let page = 1;
-let pageIdx = 1;
-let cnt = 1;
 
 function fetchPage() {
-    fetch(`https://luinesse.store/api/${page}`)
+    fetch('https://luinesse.store/api')
             .then((res) => res.json())
             .then((res) => {
                 const board = document.querySelector('.article');
@@ -72,41 +69,8 @@ function fetchPage() {
                     hr.style.width = '1400px';
                     board.appendChild(divCell);
                     board.appendChild(hr);
-                    cnt++;
-                    if(cnt == 10) {
-                        pageIdx++;
-                        cnt = 1;
-                    }
                 });
-                const pageClass = document.querySelector(".pageNum");
-                for(var i = 1; i <= pageIdx; i++) {
-                    const num = document.createElement('li');
-                    const listStyle = {
-                        float: 'left',
-                        marginRight: "20px"
-                    };
-
-                    for(const [key, value] of Object.entries(listStyle)) {
-                        num.style[key] = value;
-                    }
-                    num.textContent = i;
-                    pageClass.appendChild(num);
-                }
-                const pageNumber = document.querySelectorAll(".pageNum > li");
-
-                pageNumber.forEach((li) => {
-                li.addEventListener("click", pageClick);
-            });
         });
-}
-
-function pageClick(event) {
-    const clickPage = parseInt(event.target.textContent);
-    page = clickPage;
-
-    console.log("이벤트 실행");
-
-    fetchPage();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
