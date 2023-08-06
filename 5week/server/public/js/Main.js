@@ -107,13 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('fade');
     });
 
+    fetchPage();
+
     const pageNumber = document.querySelector(".pageNum li");
 
     pageNumber.forEach((li) => {
         li.addEventListener("click", pageClick);
     });
-
-    fetchPage();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
