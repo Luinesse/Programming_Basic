@@ -92,7 +92,12 @@ function fetchPage() {
                     num.textContent = i;
                     pageClass.appendChild(num);
                 }
+                const pageNumber = document.querySelectorAll(".pageNum > li");
+
+                pageNumber.forEach((li) => {
+                li.addEventListener("click", pageClick);
             });
+        });
 }
 
 function pageClick(event) {
@@ -118,13 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     categoryButton.addEventListener('click', () => {
         menu.classList.toggle('open');
-    });
-
-    const pageNumber = document.querySelectorAll(".pageNum > li");
-    console.log(pageNumber.length);
-
-    pageNumber.forEach((li) => {
-        li.addEventListener("click", pageClick);
     });
 
     if(document.cookie.indexOf('user=') === -1) {
