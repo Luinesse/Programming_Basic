@@ -78,25 +78,6 @@ function fetchPage() {
                         cnt = 1;
                     }
                 });
-                const pageClass = document.querySelector(".pageNum");
-                for(var i = 1; i <= pageIdx; i++) {
-                    const num = document.createElement('li');
-                    const listStyle = {
-                        float: 'left',
-                        marginRight: "20px"
-                    };
-
-                    for(const [key, value] of Object.entries(listStyle)) {
-                        num.style[key] = value;
-                    }
-                    num.textContent = i;
-                    pageClass.appendChild(num);
-                }
-                const pageNumber = document.querySelectorAll(".pageNum > li");
-
-                pageNumber.forEach((li) => {
-                li.addEventListener("click", pageClick);
-            });
         });
 }
 
@@ -140,6 +121,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     fetchPage();
+
+    const pageClass = document.querySelector(".pageNum");
+                for(var i = 1; i <= pageIdx; i++) {
+                    const num = document.createElement('li');
+                    const listStyle = {
+                        float: 'left',
+                        marginRight: "20px"
+                    };
+
+                    for(const [key, value] of Object.entries(listStyle)) {
+                        num.style[key] = value;
+                    }
+                    num.textContent = i;
+                    pageClass.appendChild(num);
+                }
+                const pageNumber = document.querySelectorAll(".pageNum > li");
+
+                pageNumber.forEach((li) => {
+                li.addEventListener("click", pageClick);
+            });
 });
 
 function moveToWrite() {
