@@ -40,7 +40,6 @@ function fetchPage() {
         createPageBtn();
 
         const board = document.querySelector('.article');
-        board.innerHTML = '';
         createPageBtn();
         res.posts.forEach((row) => {
             const divCell = document.createElement('div');
