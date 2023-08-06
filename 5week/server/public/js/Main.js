@@ -5,11 +5,8 @@ const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
-let page = 1;
-let pageIdx = 1;
-let cnt = 1;
 
-fetch(`https://luinesse.store/api/${page}`)
+fetch('https://luinesse.store/api')
     .then((res) => res.json())
     .then((res) => {
         const board = document.querySelector('.article');
