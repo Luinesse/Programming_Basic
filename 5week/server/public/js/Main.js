@@ -5,8 +5,9 @@ const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
+let page = 1;
 
-fetch('https://luinesse.store/api')
+fetch(`https://luinesse.store/api/${page}`)
             .then((res) => res.json())
             .then((res) => {
                 const board = document.querySelector('.article');
@@ -69,6 +70,20 @@ fetch('https://luinesse.store/api')
                     board.appendChild(divCell);
                     board.appendChild(hr);
                 });
+                const pageClass = document.querySelector(".pageNum");
+                for(var i = 1; i <= page; i++) {
+                    const num = document.createElement('li');
+                    const listStyle = {
+                        float: 'left',
+                        marginRight: "20px"
+                    };
+
+                    for(const [key, value] of Object.entries(listStyle)) {
+                        num.style[key] = value;
+                    }
+                    num.textContent = i;
+                    pageClass.appendChild(num);
+                }
             });
 
 document.addEventListener('DOMContentLoaded', () => {
