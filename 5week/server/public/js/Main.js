@@ -103,8 +103,19 @@ function pageClick(event) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const loadingOverlay = document.querySelector('.loading-overlay');
+    loadingOverlay.style.display = 'none';
+    document.body.style.overflow = 'auto';
+
     window.setTimeout(() => {
         document.body.classList.remove('fade');
+    });
+
+    const categoryButton = document.querySelector('.category-button');
+    const menu = document.querySelector('.menu');
+
+    categoryButton.addEventListener('click', () => {
+        menu.classList.toggle('open');
     });
 
     fetchPage();
@@ -114,12 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pageNumber.forEach((li) => {
         li.addEventListener("click", pageClick);
     });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const loadingOverlay = document.querySelector('.loading-overlay');
-    loadingOverlay.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    
 });
 
 if(document.cookie.indexOf('user=') === -1) {
@@ -143,15 +149,6 @@ function moveToWrite() {
 function moveToMain() {
     location.href = "/";
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const categoryButton = document.querySelector('.category-button');
-    const menu = document.querySelector('.menu');
-
-    categoryButton.addEventListener('click', () => {
-        menu.classList.toggle('open');
-    });
-});
 
 mainPg.addEventListener("click",moveToMain);
 writePg.addEventListener("click",moveToWrite);
