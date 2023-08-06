@@ -24,7 +24,7 @@ function createPageBtn() {
 }
 
 function fetchPage() {
-    fetch('https://luinesse.store/api')
+    fetch(`https://luinesse.store/api/posts?page=${currentPage}`)
     .then((res) => res.json())
     .then((res) => {
         totalPages = res.totalPages;
