@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         menu.classList.toggle('open');
     });
 
-    const pageNumber = document.querySelectorAll(".pageNum li");
+    const pageNumber = document.querySelectorAll(".pageNum > li");
 
     pageNumber.forEach((li) => {
         li.addEventListener("click", pageClick);
