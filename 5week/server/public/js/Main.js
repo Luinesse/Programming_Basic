@@ -40,6 +40,8 @@ function fetchPage() {
         createPageBtn();
 
         const board = document.querySelector('.article');
+        board.innerHTML = '';
+        createPageBtn();
         res.posts.forEach((row) => {
             const divCell = document.createElement('div');
             const style = {
@@ -120,6 +122,8 @@ function initPage() {
 
     const urlParams = new URLSearchParams(window.location.search);
     currentPage = parseInt(urlParams.get('page')) || 1;
+
+    createPageBtn();
 
     fetchPage();
 }
