@@ -100,8 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
             location.replace("/logout");
         });
     }
-
-    fetchPage();
 });
 
 function moveToWrite() {
