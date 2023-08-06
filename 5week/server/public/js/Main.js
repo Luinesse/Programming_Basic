@@ -77,7 +77,6 @@ function fetchPage() {
                         pageIdx++;
                         cnt = 1;
                     }
-                    console.log(pageIdx);
                 });
         });
 }
@@ -89,6 +88,29 @@ function pageClick(event) {
     console.log("이벤트 실행");
 
     fetchPage();
+}
+
+function makeList() {
+    const pageClass = document.querySelector(".pageNum");
+                for(var i = 1; i <= pageIdx; i++) {
+                    const num = document.createElement('li');
+                    const listStyle = {
+                        float: 'left',
+                        marginRight: "20px"
+                    };
+
+                    for(const [key, value] of Object.entries(listStyle)) {
+                        num.style[key] = value;
+                    }
+                    num.textContent = i;
+                    pageClass.appendChild(num);
+                    console.log(pageIdx);
+                }
+                const pageNumber = document.querySelectorAll(".pageNum > li");
+
+                pageNumber.forEach((li) => {
+                li.addEventListener("click", pageClick);
+            });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -122,27 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     fetchPage();
-
-    const pageClass = document.querySelector(".pageNum");
-                for(var i = 1; i <= pageIdx; i++) {
-                    const num = document.createElement('li');
-                    const listStyle = {
-                        float: 'left',
-                        marginRight: "20px"
-                    };
-
-                    for(const [key, value] of Object.entries(listStyle)) {
-                        num.style[key] = value;
-                    }
-                    num.textContent = i;
-                    pageClass.appendChild(num);
-                    console.log(pageIdx);
-                }
-                const pageNumber = document.querySelectorAll(".pageNum > li");
-
-                pageNumber.forEach((li) => {
-                li.addEventListener("click", pageClick);
-            });
+    makeList();
 });
 
 function moveToWrite() {
