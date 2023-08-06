@@ -5,7 +5,6 @@ const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
-const pageNumber = document.querySelector(".pageNum li");
 let page = 1;
 let pageIdx = 1;
 let cnt = 1;
@@ -96,8 +95,6 @@ function fetchPage() {
             });
 }
 
-fetchPage();
-
 function pageClick(event) {
     const clickPage = parseInt(event.target.textContent);
     page = clickPage;
@@ -105,14 +102,18 @@ function pageClick(event) {
     fetchPage();
 }
 
-pageNumber.forEach((li) => {
-    li.addEventListener("click", pageClick);
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
         document.body.classList.remove('fade');
     });
+
+    const pageNumber = document.querySelector(".pageNum li");
+
+    pageNumber.forEach((li) => {
+        li.addEventListener("click", pageClick);
+    });
+
+    fetchPage();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
