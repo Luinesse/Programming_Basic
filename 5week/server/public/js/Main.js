@@ -12,6 +12,7 @@ fetch(`https://luinesse.store/api/${page}`)
             .then((res) => {
                 const board = document.querySelector('.article');
                 res.forEach((row) => {
+                    const cnt = 1;
                     const divCell = document.createElement('div');
                     const style = {
                         display: 'flex',
@@ -83,6 +84,11 @@ fetch(`https://luinesse.store/api/${page}`)
                     }
                     num.textContent = i;
                     pageClass.appendChild(num);
+                }
+                cnt++;
+                if(cnt == 10) {
+                    page++;
+                    cnt = 1;
                 }
             });
 
