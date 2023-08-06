@@ -99,6 +99,8 @@ function pageClick(event) {
     const clickPage = parseInt(event.target.textContent);
     page = clickPage;
 
+    console.log("이벤트 실행");
+
     fetchPage();
 }
 
