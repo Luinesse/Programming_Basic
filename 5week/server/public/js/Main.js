@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const pageNumber = document.querySelectorAll(".pageNum > li");
+    console.log(pageNumber.length);
 
     pageNumber.forEach((li) => {
         li.addEventListener("click", pageClick);
