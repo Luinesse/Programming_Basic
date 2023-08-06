@@ -6,14 +6,14 @@ const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
 let page = 1;
+let pageIdx = 1;
+let cnt = 1;
 
 fetch(`https://luinesse.store/api/${page}`)
             .then((res) => res.json())
             .then((res) => {
                 const board = document.querySelector('.article');
                 res.forEach((row) => {
-                    let pageIdx = 1;
-                    let cnt = 1;
                     const divCell = document.createElement('div');
                     const style = {
                         display: 'flex',
