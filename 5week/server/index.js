@@ -129,7 +129,7 @@ app.post('/revise', (req, res) => {
 			res.send('<script type="text/javascript">alert("수정이 완료됐습니다."); location.replace("/");</script>');
 		});
 	} else {
-		res.send(req.body);
+		res.send('<script type="text/javascript">alert("수정에 실패했습니다."); location.replace("/");</script>');
 	}
 });
 
