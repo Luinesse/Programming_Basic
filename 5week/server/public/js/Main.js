@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     num.textContent = i;
                     pageClass.appendChild(num);
+                    console.log(i);
                 }
                 const pageNumber = document.querySelectorAll(".pageNum > li");
 
