@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchPage();
 
-    const pageNumber = document.querySelector(".pageNum li");
+    const pageNumber = document.querySelectorAll(".pageNum li");
 
     pageNumber.forEach((li) => {
         li.addEventListener("click", pageClick);
