@@ -150,10 +150,22 @@ app.post('/revisereq', (req, res) => {
 	}
 });
 
-app.get('/api',(req, res) => {
-	connection.query('SELECT * FROM boardInfo', (error, rows) => {
-		if (error) throw error;
-		res.send(rows);
+app.get('/api/posts',(req, res) => {
+	const { page } = req.query;
+	const perPage = 10;
+
+	const startIdx = (page - 1) * perPage;
+
+	connection.query('SELECT COUNT(*) as totalCount FROM boardInfo', (error, countResult) => {
+		if(error)	throw error;
+		const totalCount = countResult[0].totalCount;
+		const totalPages = Math.ceil(totalCount / perPage);
+
+		connection.query('SELECT * FROM boardInfo LIMIT ?, ?', [startIdx, perPage], (error, rows) => {
+			if (error) throw error;
+			
+			res.json({ totalPages, posts: results });
+		});
 	});
 });
 

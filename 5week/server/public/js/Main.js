@@ -5,12 +5,33 @@ const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
+let currentPage = 1;
+let totalPages = 1;
 
-fetch('https://luinesse.store/api')
+function createPageBtn() {
+    const pageList = document.querySelector(".pageNum");
+    pageList.innerHTML = "";
+
+    for(let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement("li");
+        pageBtn.textContent = i;
+        pageBtn.addEventListener("click", () => {
+            currentPage = i;
+            fetchPage();
+        });
+        pageList.appendChild(pageBtn);
+    }
+}
+
+function fetchPage() {
+    fetch('https://luinesse.store/api')
     .then((res) => res.json())
     .then((res) => {
+        totalPages = res.totalPages;
+        createPageBtn();
+
         const board = document.querySelector('.article');
-        res.forEach((row) => {
+        res.posts.forEach((row) => {
             const divCell = document.createElement('div');
             const style = {
                 display: 'flex',
@@ -70,8 +91,9 @@ fetch('https://luinesse.store/api')
             board.appendChild(hr);
         });
 });
+}
 
-document.addEventListener('DOMContentLoaded', () => {
+function initPage() {
     const loadingOverlay = document.querySelector('.loading-overlay');
     loadingOverlay.style.display = 'none';
     document.body.style.overflow = 'auto';
@@ -87,6 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
         menu.classList.toggle('open');
     });
 
+    fetchPage();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     if(document.cookie.indexOf('user=') === -1) {
         state.textContent = 'Login';
         state.addEventListener('click', e => {
@@ -110,6 +136,7 @@ function moveToMain() {
     location.href = "/";
 }
 
+document.addEventListener("DOMContentLoaded",initPage);
 mainPg.addEventListener("click",moveToMain);
 writePg.addEventListener("click",moveToWrite);
 titleH.addEventListener("click",moveToMain);
