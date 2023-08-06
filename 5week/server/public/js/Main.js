@@ -89,7 +89,6 @@ fetch(`https://luinesse.store/api/${page}`)
                         num.style[key] = value;
                     }
                     num.textContent = i;
-                    num.addEventListener('click', page = i);
                     pageClass.appendChild(num);
                 }
             });
