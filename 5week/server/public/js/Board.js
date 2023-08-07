@@ -8,6 +8,9 @@ const listB = document.getElementById("list-btn");
 const reviseB = document.getElementById("revise-btn");
 const deleteB = document.getElementById("delete-btn");
 const bid = document.location.pathname.split('/')[3];
+const bidConst = document.getElementById("bidText");
+
+bidConst.value = bid;
 
 fetch(`/board/api/${bid}`)
 .then(res => res.json())
@@ -22,11 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
         document.body.classList.remove('fade');
     });
-
-    const bidConst = document.getElementById("bidType");
-
-    bidConst.value = bid;
-
 });
 
 document.addEventListener('DOMContentLoaded', () => {
