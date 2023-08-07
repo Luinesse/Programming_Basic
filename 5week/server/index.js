@@ -103,11 +103,9 @@ app.post('/write', (req, res) => {
 app.post('/comment', (req, res) => {
 	const { bid, write_comment } = req.body;
 
-	if(typeof req.session.user === 'undefined' && typeof req.session.user.id === 'undefined') {
-		res.send('<script type="text/javascript">alert("로그인 후 이용해 주세요."); location.reload();</script>');
-	}
-
-	if(bid && write_comment) {
+	if(typeof req.session.user === 'undefined' || typeof req.session.user.id === 'undefined') {
+		res.send('<script type="text/javascript">alert("로그인 후 이용해 주세요."); location.replace("/");</script>');
+	} else if(bid && write_comment) {
 		connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
 			if(error)	throw error;
 			connection.query('INSERT INTO commentInfo (text, replyDate, username, userInfo_uid, boardInfo_bid) VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)', [write_comment, req.session.user.id, results[0].uid, bid], (error, data) => {
