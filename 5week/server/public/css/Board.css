@@ -170,6 +170,11 @@ img {
     justify-content: center;
 }
 
+.comment-line {
+    display: flex;
+    justify-content: center;
+}
+
 .comment-text {
     width: 50%;
     margin-right: 20px;

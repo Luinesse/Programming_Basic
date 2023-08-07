@@ -187,6 +187,13 @@ app.get('/api/posts',(req, res) => {
 	});
 });
 
+app.get('/comment/api/:bid', (req, res) => {
+	connection.query('SELECT text, replyDate, username FROM commentInfo WHERE boardInfo_bid = ?', [req.params.bid], (error, results, fields) => {
+		if(error)	throw error;
+		res.json({ comments : results });
+	});
+});
+
 app.get('/',(req, res) => {
 	console.log(req.session);
 	res.sendFile(path.join(__dirname, './public', 'html', 'Main.html'));

@@ -21,6 +21,30 @@ fetch(`/board/api/${bid}`)
     contents.textContent = myJson.contents;
 });
 
+fetch(`/comment/api/${bid}`)
+.then(res => res.json())
+.then(myJson => {
+    const commentRow = document.querySelector(".comment_line");
+    res.comments.forEach((row) => {
+        const commentCell = document.createElement('div');
+        const dStyle = {
+            display: 'flex',
+            justifyContent : 'center'
+        };
+
+        for(const [key, value] of Object.entries(style)) {
+            commentCell.style[key] = value;
+        }
+
+        ['text', 'username', 'replyDate'].forEach((key) => {
+            const commentList = document.createElement('p');
+            commentList.textContent = row[key];
+            commentCell.appendChild(commentList);
+        });
+        commentRow.appendChild(commentCell);
+    });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
         document.body.classList.remove('fade');
