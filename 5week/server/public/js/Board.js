@@ -29,16 +29,25 @@ fetch(`/comment/api/${bid}`)
         const commentCell = document.createElement('div');
         const dStyle = {
             display: 'flex',
-            justifyContent : 'center'
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '50%'
         };
 
         for(const [key, value] of Object.entries(dStyle)) {
             commentCell.style[key] = value;
         }
 
-        ['text', 'username', 'replyDate'].forEach((key) => {
+        ['username', 'text', 'replyDate'].forEach((key) => {
             const commentList = document.createElement('p');
-            commentList.textContent = row[key];
+            
+            if(key === 'replyDate') {
+                const dateValue = row[key].substring(0, 10);
+                commentList.textContent = dateValue;
+            } else {
+                commentList.textContent = row[key];
+            }
+
             commentCell.appendChild(commentList);
         });
         commentRow.appendChild(commentCell);

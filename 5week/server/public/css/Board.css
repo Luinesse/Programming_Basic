@@ -170,9 +170,11 @@ img {
     justify-content: center;
 }
 
-.comment-line {
+.comment_line {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .comment-text {
