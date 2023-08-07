@@ -7,6 +7,7 @@ const userhi = document.querySelector(".hi");
 const listB = document.getElementById("list-btn");
 const reviseB = document.getElementById("revise-btn");
 const deleteB = document.getElementById("delete-btn");
+const bid = document.location.pathname.split('/')[3];
 
 fetch(`/board/api/${bid}`)
 .then(res => res.json())
@@ -23,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const bidConst = document.getElementById("bidType");
-    const bid = document.location.pathname.split('/')[3];
 
     bidConst.value = bid;
 
