@@ -103,7 +103,7 @@ app.post('/write', (req, res) => {
 app.post('/comment', (req, res) => {
 	const { bid, write_comment } = req.body;
 
-	if(typeof req.session.user == 'undefined' && typeof req.session.user.id == 'undefined') {
+	if(typeof req.session.user === 'undefined' && typeof req.session.user.id === 'undefined') {
 		res.send('<script type="text/javascript">alert("로그인 후 이용해 주세요."); location.reload();</script>');
 	}
 
