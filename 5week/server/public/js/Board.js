@@ -25,7 +25,7 @@ fetch(`/comment/api/${bid}`)
 .then(res => res.json())
 .then(myJson => {
     const commentRow = document.querySelector(".comment_line");
-    res.comments.forEach((row) => {
+    res.comments.forEach((results) => {
         const commentCell = document.createElement('div');
         const dStyle = {
             display: 'flex',
@@ -38,7 +38,7 @@ fetch(`/comment/api/${bid}`)
 
         ['text', 'username', 'replyDate'].forEach((key) => {
             const commentList = document.createElement('p');
-            commentList.textContent = row[key];
+            commentList.textContent = results[key];
             commentCell.appendChild(commentList);
         });
         commentRow.appendChild(commentCell);
