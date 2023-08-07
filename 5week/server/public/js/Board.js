@@ -23,22 +23,22 @@ fetch(`/board/api/${bid}`)
 
 fetch(`/comment/api/${bid}`)
 .then(res => res.json())
-.then(myJson => {
+.then((res) => {
     const commentRow = document.querySelector(".comment_line");
-    res.comments.forEach((results) => {
+    res.comments.forEach((row) => {
         const commentCell = document.createElement('div');
         const dStyle = {
             display: 'flex',
             justifyContent : 'center'
         };
 
-        for(const [key, value] of Object.entries(style)) {
+        for(const [key, value] of Object.entries(dStyle)) {
             commentCell.style[key] = value;
         }
 
         ['text', 'username', 'replyDate'].forEach((key) => {
             const commentList = document.createElement('p');
-            commentList.textContent = results[key];
+            commentList.textContent = row[key];
             commentCell.appendChild(commentList);
         });
         commentRow.appendChild(commentCell);
