@@ -103,7 +103,7 @@ app.post('/write', (req, res) => {
 app.post('/comment', (req, res) => {
 	const { bid, write_comment } = req.body;
 
-	if(!req.session.user.id) {
+	if(typeof req.session.user == 'undefined' && typeof req.session.user.id == 'undefined') {
 		res.send('<script type="text/javascript">alert("로그인 후 이용해 주세요."); location.reload();</script>');
 	}
 
@@ -112,11 +112,11 @@ app.post('/comment', (req, res) => {
 			if(error)	throw error;
 			connection.query('INSERT INTO commentInfo (text, replyDate, username, userInfo_uid, boardInfo_bid) VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)', [write_comment, req.session.user.id, results[0].uid, bid], (error, data) => {
 				if(error)	throw error2;
-				res.send('<script type="text/javascript">alert("등록이 완료됐습니다."); location.reload();</script>');
+				res.send('<script type="text/javascript">alert("등록이 완료됐습니다."); location.replace("/");</script>');
 			});
 		});
 	} else {
-		res.send('<script type="text/javascript">alert("내용을 입력해주세요."); location.reload();</script>');
+		res.send('<script type="text/javascript">alert("내용을 입력해주세요."); location.replace("/");</script>');
 	}
 });
 
