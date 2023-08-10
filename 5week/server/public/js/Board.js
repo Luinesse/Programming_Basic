@@ -74,7 +74,7 @@ fetch(`/comment/api/${bid}`)
         }
         deleteComment.textContent = "삭제";
         deleteComment.addEventListener("click", () => {
-            if(document.cookie.indexOf('user=' === 1)) {
+            if(document.cookie.indexOf('user=' === -1)) {
                 alert("로그인 후 이용해 주세요.");
             } else {
                 const reqData = {
