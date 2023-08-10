@@ -43,6 +43,7 @@ fetch(`/comment/api/${bid}`)
                 const commentCid = document.createElement('span');
                 commentCid.textContent = row[key];
                 commentCid.classList.add('comment-cid');
+                commentCid.style.display = 'none';
                 commentCell.appendChild(commentCid);
             } else {
                 const commentList = document.createElement('p');
