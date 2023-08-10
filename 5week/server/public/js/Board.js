@@ -68,7 +68,7 @@ fetch(`/comment/api/${bid}`)
             deleteComment.style[key] = value;
         }
         deleteComment.textContent = "삭제";
-
+        commentCell.appendChild(deleteComment);
         commentRow.appendChild(commentCell);
     });
 });
