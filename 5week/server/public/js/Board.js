@@ -117,37 +117,35 @@ else {
 }
 
 function commentDelete(cidToDelete) {
-    deleteComment.addEventListener("click", () => {
-        if(document.cookie.indexOf('user=') === -1) {
-            alert("로그인 후 이용해 주세요.");
-        } else {
-            const reqData = {
-                user : document.cookie.split('user=')[1].split(';')[0],
-                boardId : bid,
-                commentId : cidToDelete,
-            };
+    if(document.cookie.indexOf('user=') === -1) {
+        alert("로그인 후 이용해 주세요.");
+    } else {
+        const reqData = {
+            user : document.cookie.split('user=')[1].split(';')[0],
+            boardId : bid,
+            commentId : cidToDelete,
+        };
 
-            fetch('/commentdel', {
-                method: 'POST',
-                headers : {
-                    'Content-Type' : 'application/json',
-                },
-                body: JSON.stringify(reqData),
-            })
-            .then(res => res.json())
-            .then(data => {
-                if(data.success) {
-                    alert("삭제가 완료됐습니다.");
-                    location.replace("/");
-                } else {
-                    alert("사용자의 댓글이 아니거나 로그인 상태를 확인해 주세요.");
-                }
-            })
-            .catch(error => {
-                console.error("ERROR : ", error);
-            });
-        }
-    });
+        fetch('/commentdel', {
+            method: 'POST',
+            headers : {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify(reqData),
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.success) {
+                alert("삭제가 완료됐습니다.");
+                location.replace("/");
+            } else {
+                alert("사용자의 댓글이 아니거나 로그인 상태를 확인해 주세요.");
+            }
+        })
+        .catch(error => {
+            console.error("ERROR : ", error);
+        });
+    }
 }
 
 //글 삭제, 글 수정, 목록으로 가기 버튼
