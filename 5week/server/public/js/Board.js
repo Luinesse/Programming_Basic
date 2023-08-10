@@ -58,6 +58,17 @@ fetch(`/comment/api/${bid}`)
 
             commentCell.appendChild(commentList);
         });
+        const deleteComment = document.createElement('p');
+        const deleteStyle = {
+            width: '25%',
+            textAlign: 'start'
+        }
+
+        for(const [key, value] of Object.entries(deleteStyle)) {
+            deleteComment.style[key] = value;
+        }
+        deleteComment.textContent = "삭제";
+
         commentRow.appendChild(commentCell);
     });
 });
