@@ -86,7 +86,7 @@ document.addEventListener('click', function(event) {
         const commentCell = event.target.parentNode;
         const cidToDelete = commentCell.querySelector('.comment-cid').textContent;
 
-        deleteComment(cidToDelete);
+        commentDelete(cidToDelete);
     }
 });
 
