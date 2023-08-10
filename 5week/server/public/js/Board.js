@@ -9,7 +9,6 @@ const reviseB = document.getElementById("revise-btn");
 const deleteB = document.getElementById("delete-btn");
 const bid = document.location.pathname.split('/')[3];
 const bidConst = document.getElementById("bidText");
-let cid;
 
 bidConst.value = bid;
 
@@ -41,7 +40,10 @@ fetch(`/comment/api/${bid}`)
 
         ['cid', 'username', 'text', 'replyDate'].forEach((key) => {
             if(key === 'cid') {
-                cid = row[key];
+                const commentCid = document.createElement('span');
+                commentCid.textContent = row[key];
+                commentCid.classList.add('comment-cid');
+                commentCell.appendChild(commentCid);
             } else {
                 const commentList = document.createElement('p');
                 const commentStyle = {
@@ -73,40 +75,19 @@ fetch(`/comment/api/${bid}`)
             deleteComment.style[key] = value;
         }
         deleteComment.textContent = "삭제";
-        deleteComment.addEventListener("click", () => {
-            if(document.cookie.indexOf('user=') === -1) {
-                alert("로그인 후 이용해 주세요.");
-            } else {
-                const reqData = {
-                    user : document.cookie.split('user=')[1].split(';')[0],
-                    boardId : bid,
-                    commentId : cid,
-                };
-
-                fetch('/commentdel', {
-                    method: 'POST',
-                    headers : {
-                        'Content-Type' : 'application/json',
-                    },
-                    body: JSON.stringify(reqData),
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if(data.success) {
-                        alert("삭제가 완료됐습니다.");
-                        location.replace("/");
-                    } else {
-                        alert("사용자의 댓글이 아니거나 로그인 상태를 확인해 주세요.");
-                    }
-                })
-                .catch(error => {
-                    console.error("ERROR : ", error);
-                });
-            }
-        });
+        deleteComment.classList.add('comment-deleteBtn');
         commentCell.appendChild(deleteComment);
         commentRow.appendChild(commentCell);
     });
+});
+
+document.addEventListener('click', function(event) {
+    if(event.target && event.target.classList.contains('comment-deleteBtn')) {
+        const commentCell = event.target.parentNode;
+        const cidToDelete = commentCell.querySelector('.comment-cid').textContent;
+
+        deleteComment(cidToDelete);
+    }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -132,6 +113,40 @@ else {
     state.textContent = 'Logout';
     state.addEventListener('click', e => {
         location.replace("/logout");
+    });
+}
+
+function commentDelete(cidToDelete) {
+    deleteComment.addEventListener("click", () => {
+        if(document.cookie.indexOf('user=') === -1) {
+            alert("로그인 후 이용해 주세요.");
+        } else {
+            const reqData = {
+                user : document.cookie.split('user=')[1].split(';')[0],
+                boardId : bid,
+                commentId : cidToDelete,
+            };
+
+            fetch('/commentdel', {
+                method: 'POST',
+                headers : {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify(reqData),
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    alert("삭제가 완료됐습니다.");
+                    location.replace("/");
+                } else {
+                    alert("사용자의 댓글이 아니거나 로그인 상태를 확인해 주세요.");
+                }
+            })
+            .catch(error => {
+                console.error("ERROR : ", error);
+            });
+        }
     });
 }
 
