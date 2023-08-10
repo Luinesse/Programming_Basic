@@ -138,6 +138,26 @@ app.post('/delete', (req, res) => {
 	}
 });
 
+app.post('/commentdel', (req, res) => {
+	const { user, boardId, commentId } = req.body;
+	
+	if(boardId && user && commentId) {
+		connection.query('SELECT username FROM commentInfo WHERE boardInfo_bid = ?', [boardId], (error, results, fields) => {
+			if(error)	throw error;
+			if(results[0].username == user) {
+				connection.query('DELETE FROM commentInfo WHERE cid = ?', [commentId], (error, results, fields) => {
+					if(error)	throw error2;
+					res.json({ success : true });
+				});
+			} else {
+				res.json({ success : false });
+			}
+		});
+	} else {
+		res.json({ success : false });
+	}
+});
+
 app.post('/revise', (req, res) => {
 	const { bid, wrote_title, wrote_article } = req.body;
 
@@ -188,7 +208,7 @@ app.get('/api/posts',(req, res) => {
 });
 
 app.get('/comment/api/:bid', (req, res) => {
-	connection.query('SELECT text, replyDate, username FROM commentInfo WHERE boardInfo_bid = ?', [req.params.bid], (error, results, fields) => {
+	connection.query('SELECT cid, text, replyDate, username FROM commentInfo WHERE boardInfo_bid = ?', [req.params.bid], (error, results, fields) => {
 		if(error)	throw error;
 		res.json({ comments : results });
 	});
