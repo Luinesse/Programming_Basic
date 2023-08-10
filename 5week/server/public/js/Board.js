@@ -42,7 +42,7 @@ fetch(`/comment/api/${bid}`)
             const commentList = document.createElement('p');
             const commentStyle = {
                 width: '25%',
-                textAlign: 'center',
+                textAlign: 'start',
             }
 
             for(const [key, value] of Object.entries(commentStyle)) {
