@@ -40,7 +40,15 @@ fetch(`/comment/api/${bid}`)
 
         ['username', 'text', 'replyDate'].forEach((key) => {
             const commentList = document.createElement('p');
-            
+            const commentStyle = {
+                width: '25%',
+                textAlign: 'center',
+            }
+
+            for(const [key, value] of Object.entries(commentStyle)) {
+                commentList.style[key] = value;
+            }
+
             if(key === 'replyDate') {
                 const dateValue = row[key].substring(0, 10);
                 commentList.textContent = dateValue;
