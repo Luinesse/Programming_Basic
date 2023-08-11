@@ -176,7 +176,7 @@ function searchPosts(searchText, page) {
         headers: {
             'Content-Type' : 'application/json',
         },
-        body: JSON.stringify({ searchText : searchText }),
+        body: JSON.stringify({ searchText : searchText, page : page }),
     })
     .then((res) => res.json())
     .then((res) => {
