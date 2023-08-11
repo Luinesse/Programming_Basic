@@ -223,6 +223,7 @@ app.get('/api/search',(req, res) => {
 			if (error) throw error;
 			
 			res.json({ totalPages, posts: rows });
+			console.log(page, search);
 		});
 	});
 });
