@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchEnter.addEventListener("keypress", (event) => {
         if(event.key === 'Enter') {
             event.preventDefault();
-            const searchText = searchInput.value;
+            const searchText = searchEnter.value;
             if(searchText.trim() !== '') {
                 searchPosts(searchText, 1);
             }
