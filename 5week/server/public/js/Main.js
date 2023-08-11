@@ -155,6 +155,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    const searchEnter = document.querySelector('.search_content');
+    searchEnter.addEventListener("keypress", (event) => {
+        if(e.key === 'Enter') {
+            event.preventDefault();
+            const searchInput = document.querySelector(".search_content");
+            const searchText = searchInput.value;
+            if(searchText.trim() !== '') {
+                searchPosts(searchText, 1);
+            }
+        }
+    });
+
     const pageList = document.querySelector('.pageNum');
     pageList.addEventListener("click", (event) => {
         if(event.target.tagName === 'LI') {
