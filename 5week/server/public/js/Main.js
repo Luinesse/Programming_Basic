@@ -6,7 +6,8 @@ const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
 const searchCur = document.querySelector(".search_post");
-let searchText = searchCur.textContent;
+const searchContent = document.querySelector(".search_content");
+let searchText;
 let currentPage = 1;
 let totalPages = 1;
 
@@ -231,6 +232,7 @@ function initPage() {
 }
 
 function searchPost() {
+    searchText = searchContent.textContent;
     createSearchPageBtn();
     searchPage();
 }
