@@ -207,6 +207,26 @@ app.get('/api/posts',(req, res) => {
 	});
 });
 
+app.get('/api/search',(req, res) => {
+	const { page, search } = req.query;
+	const perPage = 10;
+	search = '%' + search + '%';
+
+	const startIdx = (page - 1) * perPage;
+
+	connection.query('SELECT COUNT(*) as totalCount FROM boardInfo WHERE title LIKE ? OR article LIKE ?',[search, search], (error, countResult) => {
+		if(error)	throw error;
+		const totalCount = countResult[0].totalCount;
+		const totalPages = Math.ceil(totalCount / perPage);
+
+		connection.query('SELECT * FROM boardInfo WHERE title LIKE ? OR article LIKE ? LIMIT ?, ?', [search, search, startIdx, perPage], (error, rows) => {
+			if (error) throw error;
+			
+			res.json({ totalPages, posts: rows });
+		});
+	});
+});
+
 app.get('/comment/api/:bid', (req, res) => {
 	connection.query('SELECT cid, text, replyDate, username FROM commentInfo WHERE boardInfo_bid = ?', [req.params.bid], (error, results, fields) => {
 		if(error)	throw error;
