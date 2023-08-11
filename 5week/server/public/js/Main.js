@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const searchEnter = document.querySelector('.search_content');
     searchEnter.addEventListener("keypress", (event) => {
-        if(e.key === 'Enter') {
+        if(event.key === 'Enter') {
             event.preventDefault();
             const searchText = searchInput.value;
             if(searchText.trim() !== '') {
