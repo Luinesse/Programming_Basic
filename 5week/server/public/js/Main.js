@@ -52,7 +52,7 @@ function createSearchPageBtn() {
         pageBtn.textContent = i;
         pageBtn.addEventListener("click", () => {
             currentPage = i;
-            fetchPage();
+            searchPage();
         });
         pageList.appendChild(pageBtn);
     }
