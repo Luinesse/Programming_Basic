@@ -262,3 +262,4 @@ document.addEventListener("DOMContentLoaded",initPage);
 mainPg.addEventListener("click",moveToMain);
 writePg.addEventListener("click",moveToWrite);
 titleH.addEventListener("click",moveToMain);
+searchCur.addEventListener("submit", searchPost);
