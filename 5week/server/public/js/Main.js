@@ -63,7 +63,7 @@ function searchPage() {
     .then((res) => res.json())
     .then((res) => {
         totalPages = res.totalPages;
-        createPageBtn();
+        createSearchPageBtn();
 
         const board = document.querySelector('.article');
         const articleNav = document.querySelector(".article-nav");
@@ -227,13 +227,13 @@ function initPage() {
 
     createPageBtn();
 
-    searchPage();
+    fetchPage();
 }
 
 function searchPost() {
     const searchContent = document.querySelector(".search_content");
-    searchText = searchContent.textContent;
-    createSearchPageBtn();
+    searchText = searchContent.value;
+    currentPage = 1;
     searchPage();
 }
 
