@@ -227,7 +227,7 @@ function initPage() {
 
     createPageBtn();
 
-    fetchPage();
+    searchPage();
 }
 
 function searchPost() {
