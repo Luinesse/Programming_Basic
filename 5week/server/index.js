@@ -188,6 +188,26 @@ app.post('/revisereq', (req, res) => {
 	}
 });
 
+app.post('/api/search',(req, res) => {
+	const { page, searchText } = req.body;
+	const perPage = 10;
+	const search = `%${searchText}%`;
+
+	const startIdx = (page - 1) * perPage;
+
+	connection.query('SELECT COUNT(*) as totalCount FROM boardInfo WHERE title LIKE ? OR article LIKE ?',[search, search], (error, countResult) => {
+		if(error)	throw error;
+		const totalCount = countResult[0].totalCount;
+		const totalPages = Math.ceil(totalCount / perPage);
+
+		connection.query('SELECT * FROM boardInfo WHERE title LIKE ? OR article LIKE ? LIMIT ?, ?', [search, search, startIdx, perPage], (error, rows) => {
+			if (error) throw error;
+			
+			res.json({ totalPages, posts: rows });
+		});
+	});
+});
+
 app.get('/api/posts',(req, res) => {
 	const { page } = req.query;
 	const perPage = 10;
@@ -203,27 +223,6 @@ app.get('/api/posts',(req, res) => {
 			if (error) throw error;
 			
 			res.json({ totalPages, posts: rows });
-		});
-	});
-});
-
-app.get('/api/search',(req, res) => {
-	const { page, search } = req.query;
-	const perPage = 10;
-	search = '%' + search + '%';
-
-	const startIdx = (page - 1) * perPage;
-
-	connection.query('SELECT COUNT(*) as totalCount FROM boardInfo WHERE title LIKE ? OR article LIKE ?',[search, search], (error, countResult) => {
-		if(error)	throw error;
-		const totalCount = countResult[0].totalCount;
-		const totalPages = Math.ceil(totalCount / perPage);
-
-		connection.query('SELECT * FROM boardInfo WHERE title LIKE ? OR article LIKE ? LIMIT ?, ?', [search, search, startIdx, perPage], (error, rows) => {
-			if (error) throw error;
-			
-			res.json({ totalPages, posts: rows });
-			console.log(page, search);
 		});
 	});
 });
