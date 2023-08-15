@@ -13,7 +13,6 @@ const port = 3000;
 const path = require('path');
 const cors = require('cors');
 const crypto = require('crypto');
-const escape = require('escape-html');
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -104,6 +103,7 @@ app.post('/register', (req, res) => {
 app.post('/write', (req, res) => {
 	const { wrote_title, wrote_article } = req.body;
 
+	const escape = require('escape-html');
 	const wTitle = escape(wrote_title);
 	const wArticle = escape(wrote_article);
 
