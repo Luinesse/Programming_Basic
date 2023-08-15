@@ -16,6 +16,8 @@ const cors = require('cors');
 const crypto = require('crypto');
 const escape = require('escape-html');
 
+const csrfProtection = csrf({cookie : true});
+
 app.use(csrfProtection);
 app.use(express.json());
 app.use(bodyParser.json());
@@ -41,8 +43,6 @@ app.use(
 		credentials : true
 	})
 );
-
-const csrfProtection = csrf({cookie : true});
 
 app.post('/login', csrfProtection, (req, res) => {
 	const { id, password } = req.body;
