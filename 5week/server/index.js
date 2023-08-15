@@ -9,14 +9,14 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 
+const csrfProtection = csrf({cookie : true});
+
 const app = express();
 const port = 3000;
 const path = require('path');
 const cors = require('cors');
 const crypto = require('crypto');
 const escape = require('escape-html');
-
-const csrfProtection = csrf({cookie : true});
 
 app.use(csrfProtection);
 app.use(express.json());
