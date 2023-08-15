@@ -42,21 +42,26 @@ app.use(
 app.post('/login', (req, res) => {
 	const { id, password } = req.body;
 
-	const hashPw = crypto.createHash('sha256').update(req.body.password).digest('hex');
-
 	if(id && password) {
-		connection.query('SELECT * FROM userInfo WHERE id = ? AND pw = ?', [id, hashPw], (error, results, fields) => {
+		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
 			if(error)	throw error;
 			if(results.length > 0) {
-				if(req.session.user)
+				const salt = results[0].salt;
+				const hashPw = crypto.createHash('sha256').update(password + salt).digest('hex');
+
+				if(hashPw === results[0].pw) {
+					if(req.session.user)
 					res.redirect("/");
-				else {
+					else {
 					req.session.user = {
 						id : req.body.id,
 					}
 
 					res.setHeader('Set-Cookie', ['user=' + req.body.id]);
 					res.redirect("/");
+					}
+				} else {
+					res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); location.href="/login";</script>');
 				}
 			} else {
 				res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); location.href="/login";</script>');
@@ -70,13 +75,14 @@ app.post('/login', (req, res) => {
 app.post('/register', (req, res) => {
 	const { id, password } = req.body;
 
-	const hashPw = crypto.createHash('sha256').update(req.body.password).digest('hex');
-
 	if(id && password) {
+		const salt = crypto.randomBytes(16).toString('hex');
+		const hashPw = crypto.createHash('sha256').update(password + salt).digest('hex');
+
 		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
 			if(error)	throw error;
 			if(results.length <= 0) {
-				connection.query('INSERT INTO userInfo (id, pw) VALUES(?,?)', [id, hashPw], (error, data) => {
+				connection.query('INSERT INTO userInfo (id, pw, salt) VALUES(?,?,?)', [id, hashPw, salt], (error, data) => {
 					if(error)	throw error2;
 					res.send('<script type="text/javascript">alert("회원가입이 완료됐습니다."); location.replace("/login");</script>');
 				});
