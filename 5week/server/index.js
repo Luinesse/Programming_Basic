@@ -75,7 +75,7 @@ app.post('/register', (req, res) => {
 		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
 			if(error)	throw error;
 			if(results.length <= 0) {
-				connection.query('INSERT INTO userInfo (id, pw) VALUES(?,?)', [id, hashPw], (error, data) => {
+				connection.query('INSERT INTO userInfo (id, pw) VALUES(?,?)', [id, password], (error, data) => {
 					if(error)	throw error2;
 					res.send('<script type="text/javascript">alert("회원가입이 완료됐습니다."); location.replace("/login");</script>');
 				});
