@@ -68,7 +68,7 @@ app.post('/login', (req, res) => {
 
 app.post('/register', (req, res) => {
 	const { id, password } = req.body;
-	
+
 	const hashPw = crypto.createHash('sha256').update(password).digest('hex');
 
 	if(id && password) {
