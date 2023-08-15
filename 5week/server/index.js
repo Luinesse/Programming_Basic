@@ -51,14 +51,14 @@ app.post('/login', (req, res) => {
 
 				if(hashPw === results[0].pw) {
 					if(req.session.user)
-					res.redirect("/");
+						res.redirect("/");
 					else {
-					req.session.user = {
-						id : req.body.id,
-					}
+						req.session.user = {
+							id : req.body.id,
+						}
 
-					res.setHeader('Set-Cookie', ['user=' + req.body.id]);
-					res.redirect("/");
+						res.setHeader('Set-Cookie', ['user=' + req.body.id]);
+						res.redirect("/");
 					}
 				} else {
 					res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); location.href="/login";</script>');
