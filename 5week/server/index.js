@@ -103,10 +103,6 @@ app.post('/register', (req, res) => {
 app.post('/write', (req, res) => {
 	const { wrote_title, wrote_article } = req.body;
 
-	const escape = require('escape-html');
-	const wTitle = escape(wrote_title);
-	const wArticle = escape(wrote_article);
-
 	if(wrote_title && wrote_article) {
 		connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
 			if(error)	throw error;
