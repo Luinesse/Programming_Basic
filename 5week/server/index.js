@@ -265,8 +265,7 @@ app.get('/',(req, res) => {
 	res.sendFile(path.join(__dirname, './public', 'html', 'Main.html'));
 });
 
-app.get('/login', csrfProtection, (req, res) => {
-	res.render('login', { csrfToken : req.csrfToken() });
+app.get('/login', (req, res) => {
 	res.sendFile(path.join(__dirname, './public', 'html', 'Login.html'));
 });
 
