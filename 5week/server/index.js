@@ -69,7 +69,7 @@ app.post('/login', (req, res) => {
 app.post('/register', (req, res) => {
 	const { id, password } = req.body;
 
-	const hashPw = crypto.createHash('sha256').update(password).digest('hex');
+	const hashPw = crypto.createHash('sha256').update(req.body.password).digest('hex');
 
 	if(id && password) {
 		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
