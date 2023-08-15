@@ -18,7 +18,6 @@ const cors = require('cors');
 const crypto = require('crypto');
 const escape = require('escape-html');
 
-app.use(csrfProtection);
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(
@@ -34,6 +33,7 @@ app.use(
 		saveUninitialized : true,
 	} )
 );
+app.use(csrfProtection);
 app.use(express.urlencoded({ extended : false }));
 app.use(express.static('public'));
 
