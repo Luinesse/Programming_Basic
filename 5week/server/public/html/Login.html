@@ -18,7 +18,6 @@
             <p style="margin-bottom: 30px;">Luinesse</p>
         </div>
         <form method="post" action="/login" class="login-form">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <input name="id" id="login-id" class="login-text" type="text" placeholder="아이디를 입력해 주세요.">
             <input name="password" id="login-pw" class="login-text" type="password" placeholder="비밀번호를 입력해 주세요.">
             <input type="submit" id="login-button" class="login-btn" value="로그인" disabled>
