@@ -72,7 +72,7 @@ app.post('/register', (req, res) => {
 	
 	const hashPw = crypto.createHash('sha256').update(password).digest('hex');
 
-	if(id && hashPw) {
+	if(id && password) {
 		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
 			if(error)	throw error;
 			if(results.length <= 0) {
