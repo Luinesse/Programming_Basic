@@ -107,7 +107,7 @@ app.post('/write', (req, res) => {
 	if(wrote_title && wrote_article) {
 		connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
 			if(error)	throw error;
-			connection.query('INSERT INTO boardInfo (title, article, username, boardDate, userInfo_uid) VALUES(?,?,?,CURRENT_TIMESTAMP,?)', [wrote_title, wArticle, req.session.user.id, results[0].uid], (error, data) => {
+			connection.query('INSERT INTO boardInfo (title, article, username, boardDate, userInfo_uid) VALUES(?,?,?,CURRENT_TIMESTAMP,?)', [wTitle, wArticle, req.session.user.id, results[0].uid], (error, data) => {
 				if(error)	throw error2;
 				res.send('<script type="text/javascript">alert("작성이 완료됐습니다."); location.replace("/");</script>');
 			});
@@ -120,12 +120,14 @@ app.post('/write', (req, res) => {
 app.post('/comment', (req, res) => {
 	const { bid, write_comment } = req.body;
 
+	const wComment = escape(write_comment);
+
 	if(typeof req.session.user === 'undefined' || typeof req.session.user.id === 'undefined') {
 		res.send('<script type="text/javascript">alert("로그인 후 이용해 주세요."); location.replace("/");</script>');
 	} else if(bid && write_comment) {
 		connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
 			if(error)	throw error;
-			connection.query('INSERT INTO commentInfo (text, replyDate, username, userInfo_uid, boardInfo_bid) VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)', [write_comment, req.session.user.id, results[0].uid, bid], (error, data) => {
+			connection.query('INSERT INTO commentInfo (text, replyDate, username, userInfo_uid, boardInfo_bid) VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)', [wComment, req.session.user.id, results[0].uid, bid], (error, data) => {
 				if(error)	throw error2;
 				res.send('<script type="text/javascript">alert("등록이 완료됐습니다."); location.replace("/");</script>');
 			});
@@ -178,8 +180,11 @@ app.post('/commentdel', (req, res) => {
 app.post('/revise', (req, res) => {
 	const { bid, wrote_title, wrote_article } = req.body;
 
+	const wTitle = escape(wrote_title);
+	const wArticle = escape(wrote_article);
+
 	if(wrote_title && wrote_article && bid) {
-		connection.query('UPDATE boardInfo SET title = ?, article = ? WHERE bid = ?', [wrote_title, wrote_article, bid], (error, results, fields) => {
+		connection.query('UPDATE boardInfo SET title = ?, article = ? WHERE bid = ?', [wTitle, wArticle, bid], (error, results, fields) => {
 			if(error)	throw error;
 			res.send('<script type="text/javascript">alert("수정이 완료됐습니다."); location.replace("/");</script>');
 		});
@@ -208,7 +213,7 @@ app.post('/revisereq', (req, res) => {
 app.post('/api/search',(req, res) => {
 	const { page, searchText } = req.body;
 	const perPage = 10;
-	const search = `%${searchText}%`;
+	const search = `%${escape(searchText)}%`;
 
 	const startIdx = (page - 1) * perPage;
 
