@@ -13,6 +13,7 @@ const port = 3000;
 const path = require('path');
 const cors = require('cors');
 const crypto = require('crypto');
+const escape = require('escape-html');
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -43,7 +44,7 @@ app.post('/login', (req, res) => {
 	const { id, password } = req.body;
 
 	if(id && password) {
-		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
+		connection.query('SELECT * FROM userInfo WHERE id = ?', [escape(id)], (error, results, fields) => {
 			if(error)	throw error;
 			if(results.length > 0) {
 				const salt = results[0].salt;
@@ -53,10 +54,15 @@ app.post('/login', (req, res) => {
 					if(req.session.user)
 						res.redirect("/");
 					else {
-						req.session.user = {
-							id : req.body.id,
-						}
-
+						req.session = {
+							user: {
+								id : req.body.id,
+							},
+							cookie: {
+								maxAge: 1000 * 60 * 60 * 24 * 7
+							}
+						};
+						
 						res.setHeader('Set-Cookie', ['user=' + req.body.id]);
 						res.redirect("/");
 					}
