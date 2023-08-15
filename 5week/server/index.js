@@ -56,9 +56,6 @@ app.post('/login', (req, res) => {
 						req.session = {
 							user: {
 								id: req.body.id,
-							},
-							cookie: {
-								maxAge: 1000 * 60 * 60 * 24 * 7,
 							}
 						};
 
