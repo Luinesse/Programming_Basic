@@ -14,7 +14,10 @@ const path = require('path');
 const cors = require('cors');
 const crypto = require('crypto');
 const escape = require('escape-html');
+const csrf = require('csurf');
+const csrfProtection = csrf({cookie : true});
 
+app.use(csrfProtection);
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(
@@ -40,7 +43,7 @@ app.use(
 	})
 );
 
-app.post('/login', (req, res) => {
+app.post('/login', csrfProtection, (req, res) => {
 	const { id, password } = req.body;
 
 	if(id && password) {
@@ -75,7 +78,7 @@ app.post('/login', (req, res) => {
 	}
 });
 
-app.post('/register', (req, res) => {
+app.post('/register', csrfProtection, (req, res) => {
 	const { id, password } = req.body;
 
 	if(id && password) {
@@ -98,7 +101,7 @@ app.post('/register', (req, res) => {
 	}
 });
 
-app.post('/write', (req, res) => {
+app.post('/write', csrfProtection, (req, res) => {
 	const { wrote_title, wrote_article } = req.body;
 
 	const wTitle = escape(wrote_title);
@@ -117,7 +120,7 @@ app.post('/write', (req, res) => {
 	}
 });
 
-app.post('/comment', (req, res) => {
+app.post('/comment', csrfProtection, (req, res) => {
 	const { bid, write_comment } = req.body;
 
 	const wComment = escape(write_comment);
@@ -137,7 +140,7 @@ app.post('/comment', (req, res) => {
 	}
 });
 
-app.post('/delete', (req, res) => {
+app.post('/delete', csrfProtection, (req, res) => {
 	const { user, boardId } = req.body;
 
 	if(boardId && user) {
@@ -157,7 +160,7 @@ app.post('/delete', (req, res) => {
 	}
 });
 
-app.post('/commentdel', (req, res) => {
+app.post('/commentdel', csrfProtection, (req, res) => {
 	const { user, boardId, commentId } = req.body;
 	
 	if(boardId && user && commentId) {
@@ -177,7 +180,7 @@ app.post('/commentdel', (req, res) => {
 	}
 });
 
-app.post('/revise', (req, res) => {
+app.post('/revise', csrfProtection, (req, res) => {
 	const { bid, wrote_title, wrote_article } = req.body;
 
 	const wTitle = escape(wrote_title);
@@ -193,7 +196,7 @@ app.post('/revise', (req, res) => {
 	}
 });
 
-app.post('/revisereq', (req, res) => {
+app.post('/revisereq', csrfProtection, (req, res) => {
 	const { user, boardId } = req.body;
 
 	if(boardId && user) {
@@ -210,7 +213,7 @@ app.post('/revisereq', (req, res) => {
 	}
 });
 
-app.post('/api/search',(req, res) => {
+app.post('/api/search', csrfProtection, (req, res) => {
 	const { page, searchText } = req.body;
 	const perPage = 10;
 	const search = `%${escape(searchText)}%`;
@@ -229,6 +232,10 @@ app.post('/api/search',(req, res) => {
 		});
 	});
 });
+
+app.post('*', csrfProtection, (req, res, next) => {				//next는 *로 해당 주소가 들어왔을 때, csrfProtection 함수를 통해 csrf토큰을 검사하고, next() 호출로 원래 들어왔던 주소 ex) app.post('/', (req, res) => {}) 로 핸들을 넘김.
+	next();
+})
 
 app.get('/api/posts',(req, res) => {
 	const { page } = req.query;
