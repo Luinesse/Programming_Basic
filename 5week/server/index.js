@@ -15,7 +15,6 @@ const cors = require('cors');
 const crypto = require('crypto');
 const escape = require('escape-html');
 const csrf = require('csurf');
-const csrfProtection = csrf({cookie : true});
 
 app.use(csrfProtection);
 app.use(express.json());
@@ -251,6 +250,10 @@ app.get('/api/posts',(req, res) => {
 		});
 	});
 });
+
+app.post('*', csrfProtection, (req, res, next) => {				//next는 *로 해당 주소가 들어왔을 때, csrfProtection 함수를 통해 csrf토큰을 검사하고, next() 호출로 원래 들어왔던 주소 ex) app.post('/', (req, res) => {}) 로 핸들을 넘김.
+	next();
+})
 
 app.get('/comment/api/:bid', (req, res) => {
 	connection.query('SELECT cid, text, replyDate, username FROM commentInfo WHERE boardInfo_bid = ?', [req.params.bid], (error, results, fields) => {
