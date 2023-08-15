@@ -46,12 +46,6 @@ app.use(
 
 app.post('/login', csrfProtection, (req, res) => {
 	const { id, password } = req.body;
-	const sendToken = req.body._csrf;
-
-	if(!sendToken || sendToken !== req.csrfToken()) {
-		res.status(403).send("CSRF 토큰이 유효하지 않음.");
-		return;
-	}
 
 	if(id && password) {
 		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
@@ -271,7 +265,8 @@ app.get('/',(req, res) => {
 	res.sendFile(path.join(__dirname, './public', 'html', 'Main.html'));
 });
 
-app.get('/login',(req, res) => {
+app.get('/login', csrfProtection, (req, res) => {
+	res.render('login', { csrfToken : req.csrfToken() });
 	res.sendFile(path.join(__dirname, './public', 'html', 'Login.html'));
 });
 
