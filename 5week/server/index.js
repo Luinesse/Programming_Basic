@@ -53,11 +53,11 @@ app.post('/login', (req, res) => {
 					if(req.session.user)
 						res.redirect("/");
 					else {
-						req.session = {
-							user: {
-								id: req.body.id,
-							}
+						req.session.user = {
+							id: req.body.id,
 						};
+
+						req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7;
 
 						res.setHeader('Set-Cookie', ['user=' + req.body.id]);
 						res.redirect("/");
