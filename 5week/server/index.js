@@ -14,7 +14,6 @@ const path = require('path');
 const cors = require('cors');
 const crypto = require('crypto');
 const escape = require('escape-html');
-const csrf = require('csurf');
 
 app.use(csrfProtection);
 app.use(express.json());
