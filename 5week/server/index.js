@@ -46,9 +46,9 @@ app.use(
 
 app.post('/login', csrfProtection, (req, res) => {
 	const { id, password } = req.body;
-	const csrfToken = req.body._csrf;
+	const sendToken = req.body._csrf;
 
-	if(!csrfToken || csrfToken !== req.csrfToken()) {
+	if(!sendToken || sendToken !== req.csrfToken()) {
 		res.status(403).send("CSRF 토큰이 유효하지 않음.");
 		return;
 	}
