@@ -44,7 +44,7 @@ app.post('/login', (req, res) => {
 	const { id, password } = req.body;
 
 	if(id && password) {
-		connection.query('SELECT * FROM userInfo WHERE id = ?', [escape(id)], (error, results, fields) => {
+		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
 			if(error)	throw error;
 			if(results.length > 0) {
 				const salt = results[0].salt;
@@ -104,10 +104,13 @@ app.post('/register', (req, res) => {
 app.post('/write', (req, res) => {
 	const { wrote_title, wrote_article } = req.body;
 
+	const wTitle = escape(wrote_title);
+	const wArticle = escape(wrote_article);
+
 	if(wrote_title && wrote_article) {
 		connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
 			if(error)	throw error;
-			connection.query('INSERT INTO boardInfo (title, article, username, boardDate, userInfo_uid) VALUES(?,?,?,CURRENT_TIMESTAMP,?)', [wrote_title, wrote_article, req.session.user.id, results[0].uid], (error, data) => {
+			connection.query('INSERT INTO boardInfo (title, article, username, boardDate, userInfo_uid) VALUES(?,?,?,CURRENT_TIMESTAMP,?)', [wTitle, wArticle, req.session.user.id, results[0].uid], (error, data) => {
 				if(error)	throw error2;
 				res.send('<script type="text/javascript">alert("작성이 완료됐습니다."); location.replace("/");</script>');
 			});
