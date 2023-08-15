@@ -12,6 +12,7 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const cors = require('cors');
+const crypto = require('crypto');
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -41,6 +42,8 @@ app.use(
 app.post('/login', (req, res) => {
 	const { id, password } = req.body;
 
+	password = crypto.createHash('sha256').update(password).digest('hex');
+
 	if(id && password) {
 		connection.query('SELECT * FROM userInfo WHERE id = ? AND pw = ?', [id, password], (error, results, fields) => {
 			if(error)	throw error;
@@ -67,6 +70,8 @@ app.post('/login', (req, res) => {
 app.post('/register', (req, res) => {
 	const { id, password } = req.body;
 	
+	password = crypto.createHash('sha256').update(password).digest('hex');
+
 	if(id && password) {
 		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
 			if(error)	throw error;
