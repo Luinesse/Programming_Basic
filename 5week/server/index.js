@@ -42,9 +42,10 @@ app.use(
 app.post('/login', (req, res) => {
 	const { id, password } = req.body;
 
+	const hashPw = crypto.createHash('sha256').update(req.body.password).digest('hex');
 
 	if(id && password) {
-		connection.query('SELECT * FROM userInfo WHERE id = ? AND pw = ?', [id, password], (error, results, fields) => {
+		connection.query('SELECT * FROM userInfo WHERE id = ? AND pw = ?', [id, hashPw], (error, results, fields) => {
 			if(error)	throw error;
 			if(results.length > 0) {
 				if(req.session.user)
