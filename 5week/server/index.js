@@ -83,20 +83,24 @@ app.post('/register', (req, res) => {
 	const { id, password } = req.body;
 
 	if(id && password) {
-		const salt = crypto.randomBytes(16).toString('hex');
-		const hashPw = crypto.createHash('sha256').update(password + salt).digest('hex');
+		if(req.headers.referer === 'https://luinesse.store/register') {
+			const salt = crypto.randomBytes(16).toString('hex');
+			const hashPw = crypto.createHash('sha256').update(password + salt).digest('hex');
 
-		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
-			if(error)	throw error;
-			if(results.length <= 0) {
-				connection.query('INSERT INTO userInfo (id, pw, salt) VALUES(?,?,?)', [id, hashPw, salt], (error, data) => {
-					if(error)	throw error2;
-					res.send('<script type="text/javascript">alert("회원가입이 완료됐습니다."); location.replace("/login");</script>');
-				});
-			} else {
-				res.send('<script type="text/javascript">alert("이미 존재하는 아이디 입니다."); location.href="/register";</script>');
-			}
-		});
+			connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
+				if(error)	throw error;
+				if(results.length <= 0) {
+					connection.query('INSERT INTO userInfo (id, pw, salt) VALUES(?,?,?)', [id, hashPw, salt], (error, data) => {
+						if(error)	throw error2;
+						res.send('<script type="text/javascript">alert("회원가입이 완료됐습니다."); location.replace("/login");</script>');
+					});
+				} else {
+					res.send('<script type="text/javascript">alert("이미 존재하는 아이디 입니다."); location.href="/register";</script>');
+				}
+			});
+		} else {
+			res.send('<script type="text/javascript">alert("잘못된 접근입니다."); location.href="/";</script>');
+		}
 	} else {
 		res.send('<script type="text/javascript">alert("입력되지 않은 정보가 있습니다."); location.href="/register";</script>');
 	}
@@ -109,13 +113,17 @@ app.post('/write', (req, res) => {
 	const wArticle = escape(wrote_article);
 
 	if(wrote_title && wrote_article) {
-		connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
-			if(error)	throw error;
-			connection.query('INSERT INTO boardInfo (title, article, username, boardDate, userInfo_uid) VALUES(?,?,?,CURRENT_TIMESTAMP,?)', [wTitle, wArticle, req.session.user.id, results[0].uid], (error, data) => {
-				if(error)	throw error2;
-				res.send('<script type="text/javascript">alert("작성이 완료됐습니다."); location.replace("/");</script>');
+		if(req.headers.referer === 'https://luinesse.store/write') {
+			connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
+				if(error)	throw error;
+				connection.query('INSERT INTO boardInfo (title, article, username, boardDate, userInfo_uid) VALUES(?,?,?,CURRENT_TIMESTAMP,?)', [wTitle, wArticle, req.session.user.id, results[0].uid], (error, data) => {
+					if(error)	throw error2;
+					res.send('<script type="text/javascript">alert("작성이 완료됐습니다."); location.replace("/");</script>');
+				});
 			});
-		});
+		} else {
+			res.send('<script type="text/javascript">alert("잘못된 접근입니다."); location.href="/";</script>');
+		}
 	} else {
 		res.send('<script type="text/javascript">alert("제목과 내용을 입력해 주세요."); location.replace("/write");</script>');
 	}
@@ -129,13 +137,17 @@ app.post('/comment', (req, res) => {
 	if(typeof req.session.user === 'undefined' || typeof req.session.user.id === 'undefined') {
 		res.send('<script type="text/javascript">alert("로그인 후 이용해 주세요."); location.replace("/");</script>');
 	} else if(bid && write_comment) {
-		connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
-			if(error)	throw error;
-			connection.query('INSERT INTO commentInfo (text, replyDate, username, userInfo_uid, boardInfo_bid) VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)', [wComment, req.session.user.id, results[0].uid, bid], (error, data) => {
-				if(error)	throw error2;
-				res.send('<script type="text/javascript">alert("등록이 완료됐습니다."); location.replace("/");</script>');
+		if(req.header.referer === `https://luinesse.store/board/csr/${bid}`) {
+			connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
+				if(error)	throw error;
+				connection.query('INSERT INTO commentInfo (text, replyDate, username, userInfo_uid, boardInfo_bid) VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)', [wComment, req.session.user.id, results[0].uid, bid], (error, data) => {
+					if(error)	throw error2;
+					res.send('<script type="text/javascript">alert("등록이 완료됐습니다."); location.replace("/");</script>');
+				});
 			});
-		});
+		} else {
+			res.send('<script type="text/javascript">alert("잘못된 접근입니다."); location.href="/";</script>');
+		}
 	} else {
 		res.send('<script type="text/javascript">alert("내용을 입력해주세요."); location.replace("/");</script>');
 	}
