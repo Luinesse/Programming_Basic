@@ -4,11 +4,14 @@ const loginId = document.getElementById('login-id');
 const loginPw = document.getElementById('login-pw');
 const loginBtn = document.getElementById('login-button');
 const regisBtn = document.getElementById('register');
+const csrfToken = document.getElementById('csrf-token');
 
 document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
         document.body.classList.remove('fade');
     });
+
+    csrfToken.value = document.cookie.split('_csrf=')[1].split(';')[0];
 });
 
 document.addEventListener('DOMContentLoaded', () => {
