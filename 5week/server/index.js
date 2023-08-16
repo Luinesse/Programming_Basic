@@ -7,6 +7,9 @@ const connection = mysql.createConnection(dbconfig);
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
+
+const csrfProtection = csrf({cookie : true});
 
 const app = express();
 const port = 3000;
@@ -30,6 +33,7 @@ app.use(
 		saveUninitialized : true,
 	} )
 );
+app.use(csrfProtection);
 app.use(express.urlencoded({ extended : false }));
 app.use(express.static('public'));
 
@@ -40,7 +44,7 @@ app.use(
 	})
 );
 
-app.post('/login', (req, res) => {
+app.post('/login', csrfProtection, (req, res) => {
 	const { id, password } = req.body;
 
 	if(id && password) {
