@@ -44,7 +44,7 @@ app.post('/login', (req, res) => {
 	const { id, password } = req.body;
 
 	if(id && password) {
-		if(req.headers.referer === 'https://luinesse.store/') {
+		if(req.headers.referer === 'https://luinesse.store/login') {
 			connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
 				if(error)	throw error;
 				if(results.length > 0) {
