@@ -137,7 +137,7 @@ app.post('/comment', (req, res) => {
 	if(typeof req.session.user === 'undefined' || typeof req.session.user.id === 'undefined') {
 		res.send('<script type="text/javascript">alert("로그인 후 이용해 주세요."); location.replace("/");</script>');
 	} else if(bid && write_comment) {
-		if(req.header.referer === 'https://luinesse.store/') {
+		if(req.header.referer === 'https://luinesse.store/board/csr/:bid') {
 			connection.query('SELECT uid FROM userInfo WHERE id = ?', [req.session.user.id], (error, results, fields) => {
 				if(error)	throw error;
 				connection.query('INSERT INTO commentInfo (text, replyDate, username, userInfo_uid, boardInfo_bid) VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)', [wComment, req.session.user.id, results[0].uid, bid], (error, data) => {
