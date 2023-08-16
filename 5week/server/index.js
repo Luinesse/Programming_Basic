@@ -83,7 +83,7 @@ app.post('/login', csrfProtection, (req, res) => {
 	}
 });
 
-app.post('/register', (req, res) => {
+app.post('/register', csrfProtection, (req, res) => {
 	const { id, password } = req.body;
 
 	if(id && password) {
@@ -110,7 +110,7 @@ app.post('/register', (req, res) => {
 	}
 });
 
-app.post('/write', (req, res) => {
+app.post('/write', csrfProtection, (req, res) => {
 	const { wrote_title, wrote_article } = req.body;
 
 	const wTitle = escape(wrote_title);
@@ -133,7 +133,7 @@ app.post('/write', (req, res) => {
 	}
 });
 
-app.post('/comment', (req, res) => {
+app.post('/comment', csrfProtection, (req, res) => {
 	const { bid, write_comment } = req.body;
 
 	const wComment = escape(write_comment);
@@ -157,7 +157,7 @@ app.post('/comment', (req, res) => {
 	}
 });
 
-app.post('/delete', (req, res) => {
+app.post('/delete', csrfProtection, (req, res) => {
 	const { user, boardId } = req.body;
 
 	if(boardId && user) {
@@ -181,7 +181,7 @@ app.post('/delete', (req, res) => {
 	}
 });
 
-app.post('/commentdel', (req, res) => {
+app.post('/commentdel', csrfProtection, (req, res) => {
 	const { user, boardId, commentId } = req.body;
 	
 	if(boardId && user && commentId) {
@@ -205,7 +205,7 @@ app.post('/commentdel', (req, res) => {
 	}
 });
 
-app.post('/revise', (req, res) => {
+app.post('/revise', csrfProtection, (req, res) => {
 	const { bid, wrote_title, wrote_article } = req.body;
 
 	const wTitle = escape(wrote_title);
@@ -225,7 +225,7 @@ app.post('/revise', (req, res) => {
 	}
 });
 
-app.post('/revisereq', (req, res) => {
+app.post('/revisereq', csrfProtection, (req, res) => {
 	const { user, boardId } = req.body;
 
 	if(boardId && user) {
@@ -246,7 +246,7 @@ app.post('/revisereq', (req, res) => {
 	}
 });
 
-app.post('/api/search', (req, res) => {
+app.post('/api/search', csrfProtection, (req, res) => {
 	const { page, searchText } = req.body;
 	const perPage = 10;
 	const search = `%${escape(searchText)}%`;
@@ -270,7 +270,7 @@ app.post('/api/search', (req, res) => {
 	}
 });
 
-app.get('/api/posts',(req, res) => {
+app.get('/api/posts', (req, res) => {
 	const { page } = req.query;
 	const perPage = 10;
 
