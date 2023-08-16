@@ -71,6 +71,8 @@ app.post('/login', (req, res) => {
 					res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); location.href="/login";</script>');
 				}
 			});
+		} else {
+			res.send('<script type="text/javascript">alert("잘못된 접근입니다."); location.href="/";</script>');
 		}
 	} else {
 		res.send('<script type="text/javascript">alert("아이디와 비밀번호를 입력하세요."); location.href="/login";</script>');
