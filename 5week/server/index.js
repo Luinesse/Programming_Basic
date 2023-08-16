@@ -7,9 +7,6 @@ const connection = mysql.createConnection(dbconfig);
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const csrf = require('csurf');
-
-const csrfProtection = csrf({cookie : true});
 
 const app = express();
 const port = 3000;
@@ -33,7 +30,6 @@ app.use(
 		saveUninitialized : true,
 	} )
 );
-app.use(csrfProtection);
 app.use(express.urlencoded({ extended : false }));
 app.use(express.static('public'));
 
@@ -44,7 +40,7 @@ app.use(
 	})
 );
 
-app.post('/login', csrfProtection, (req, res) => {
+app.post('/login', (req, res) => {
 	const { id, password } = req.body;
 
 	if(id && password) {
@@ -83,7 +79,7 @@ app.post('/login', csrfProtection, (req, res) => {
 	}
 });
 
-app.post('/register', csrfProtection, (req, res) => {
+app.post('/register', (req, res) => {
 	const { id, password } = req.body;
 
 	if(id && password) {
@@ -110,7 +106,7 @@ app.post('/register', csrfProtection, (req, res) => {
 	}
 });
 
-app.post('/write', csrfProtection, (req, res) => {
+app.post('/write', (req, res) => {
 	const { wrote_title, wrote_article } = req.body;
 
 	const wTitle = escape(wrote_title);
@@ -133,7 +129,7 @@ app.post('/write', csrfProtection, (req, res) => {
 	}
 });
 
-app.post('/comment', csrfProtection, (req, res) => {
+app.post('/comment', (req, res) => {
 	const { bid, write_comment } = req.body;
 
 	const wComment = escape(write_comment);
@@ -157,7 +153,7 @@ app.post('/comment', csrfProtection, (req, res) => {
 	}
 });
 
-app.post('/delete', csrfProtection, (req, res) => {
+app.post('/delete', (req, res) => {
 	const { user, boardId } = req.body;
 
 	if(boardId && user) {
@@ -181,7 +177,7 @@ app.post('/delete', csrfProtection, (req, res) => {
 	}
 });
 
-app.post('/commentdel', csrfProtection, (req, res) => {
+app.post('/commentdel', (req, res) => {
 	const { user, boardId, commentId } = req.body;
 	
 	if(boardId && user && commentId) {
@@ -205,7 +201,7 @@ app.post('/commentdel', csrfProtection, (req, res) => {
 	}
 });
 
-app.post('/revise', csrfProtection, (req, res) => {
+app.post('/revise', (req, res) => {
 	const { bid, wrote_title, wrote_article } = req.body;
 
 	const wTitle = escape(wrote_title);
@@ -225,7 +221,7 @@ app.post('/revise', csrfProtection, (req, res) => {
 	}
 });
 
-app.post('/revisereq', csrfProtection, (req, res) => {
+app.post('/revisereq', (req, res) => {
 	const { user, boardId } = req.body;
 
 	if(boardId && user) {
@@ -246,7 +242,7 @@ app.post('/revisereq', csrfProtection, (req, res) => {
 	}
 });
 
-app.post('/api/search', csrfProtection, (req, res) => {
+app.post('/api/search', (req, res) => {
 	const { page, searchText } = req.body;
 	const perPage = 10;
 	const search = `%${escape(searchText)}%`;
@@ -270,7 +266,7 @@ app.post('/api/search', csrfProtection, (req, res) => {
 	}
 });
 
-app.get('/api/posts', (req, res) => {
+app.get('/api/posts',(req, res) => {
 	const { page } = req.query;
 	const perPage = 10;
 

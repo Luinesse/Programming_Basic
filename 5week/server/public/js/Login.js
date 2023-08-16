@@ -4,18 +4,17 @@ const loginId = document.getElementById('login-id');
 const loginPw = document.getElementById('login-pw');
 const loginBtn = document.getElementById('login-button');
 const regisBtn = document.getElementById('register');
-const csrfToken = document.getElementById('csrf-token');
 
 document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
         document.body.classList.remove('fade');
     });
+});
 
+document.addEventListener('DOMContentLoaded', () => {
     const loadingOverlay = document.querySelector('.loading-overlay');
     loadingOverlay.style.display = 'none';
     document.body.style.overflow = 'auto';
-
-    setValue();
 });
 
 function moveToRegister() {
@@ -32,11 +31,6 @@ function color() {
     }
 }
 
-function setValue() {
-    csrfToken.value = document.cookie.split('_csrf=')[1].split(';')[0];
-}
-
-loginBtn.addEventListener("click",setValue);
 regisBtn.addEventListener("click", moveToRegister);
 loginId.addEventListener("keyup", color);
 loginPw.addEventListener("keyup", color);
