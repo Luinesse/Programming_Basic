@@ -44,32 +44,34 @@ app.post('/login', (req, res) => {
 	const { id, password } = req.body;
 
 	if(id && password) {
-		connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
-			if(error)	throw error;
-			if(results.length > 0) {
-				const salt = results[0].salt;
-				const hashPw = crypto.createHash('sha256').update(password + salt).digest('hex');
-
-				if(hashPw === results[0].pw) {
-					if(req.session.user)
-						res.redirect("/");
-					else {
-						req.session.user = {
-							id: req.body.id,
-						};
-
-						req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7;
-
-						res.setHeader('Set-Cookie', ['user=' + req.body.id]);
-						res.redirect("/");
+		if(req.headers.referer == 'https://luinesse.store/') {
+			connection.query('SELECT * FROM userInfo WHERE id = ?', [id], (error, results, fields) => {
+				if(error)	throw error;
+				if(results.length > 0) {
+					const salt = results[0].salt;
+					const hashPw = crypto.createHash('sha256').update(password + salt).digest('hex');
+	
+					if(hashPw === results[0].pw) {
+						if(req.session.user)
+							res.redirect("/");
+						else {
+							req.session.user = {
+								id: req.body.id,
+							};
+	
+							req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7;
+	
+							res.setHeader('Set-Cookie', ['user=' + req.body.id]);
+							res.redirect("/");
+						}
+					} else {
+						res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); location.href="/login";</script>');
 					}
 				} else {
 					res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); location.href="/login";</script>');
 				}
-			} else {
-				res.send('<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); location.href="/login";</script>');
-			}
-		});
+			});
+		}
 	} else {
 		res.send('<script type="text/javascript">alert("아이디와 비밀번호를 입력하세요."); location.href="/login";</script>');
 	}
