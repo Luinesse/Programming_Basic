@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
         document.body.classList.remove('fade');
     });
-
-    csrfToken.value = document.cookie.split('_csrf=')[1].split(';')[0];
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,6 +32,11 @@ function color() {
     }
 }
 
+function setValue() {
+    csrfToken.value = document.cookie.split('_csrf=')[1].split(';')[0];
+}
+
+loginBtn.addEventListener("click",setValue);
 regisBtn.addEventListener("click", moveToRegister);
 loginId.addEventListener("keyup", color);
 loginPw.addEventListener("keyup", color);
