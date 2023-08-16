@@ -157,17 +157,21 @@ app.post('/delete', (req, res) => {
 	const { user, boardId } = req.body;
 
 	if(boardId && user) {
-		connection.query('SELECT username FROM boardInfo WHERE bid = ?', [boardId], (error, results, fields) => {
-			if(error)	throw error;
-			if(results[0].username == user) {
-				connection.query('DELETE FROM boardInfo WHERE bid = ?', [boardId], (error, results, fields) => {
-					if(error)	throw error2;
-					res.json({ success : true });
-				});
-			} else {
-				res.json({ success : false });
-			}
-		});
+		if(req.headers.referer === `https://luinesse.store/board/csr/${boardId}`) {
+			connection.query('SELECT username FROM boardInfo WHERE bid = ?', [boardId], (error, results, fields) => {
+				if(error)	throw error;
+				if(results[0].username == user) {
+					connection.query('DELETE FROM boardInfo WHERE bid = ?', [boardId], (error, results, fields) => {
+						if(error)	throw error2;
+						res.json({ success : true });
+					});
+				} else {
+					res.json({ success : false });
+				}
+			});
+		} else {
+			res.json({ success : false });
+		}
 	} else {
 		res.json({ success : false });
 	}
@@ -177,17 +181,21 @@ app.post('/commentdel', (req, res) => {
 	const { user, boardId, commentId } = req.body;
 	
 	if(boardId && user && commentId) {
-		connection.query('SELECT username FROM commentInfo WHERE boardInfo_bid = ?', [boardId], (error, results, fields) => {
-			if(error)	throw error;
-			if(results[0].username == user) {
-				connection.query('DELETE FROM commentInfo WHERE cid = ?', [commentId], (error, results, fields) => {
-					if(error)	throw error2;
-					res.json({ success : true });
-				});
-			} else {
-				res.json({ success : false });
-			}
-		});
+		if(req.headers.referer === `https://luinesse.store/board/csr/${boardId}`) {
+			connection.query('SELECT username FROM commentInfo WHERE boardInfo_bid = ?', [boardId], (error, results, fields) => {
+				if(error)	throw error;
+				if(results[0].username == user) {
+					connection.query('DELETE FROM commentInfo WHERE cid = ?', [commentId], (error, results, fields) => {
+						if(error)	throw error2;
+						res.json({ success : true });
+					});
+				} else {
+					res.json({ success : false });
+				}
+			});
+		} else {
+			res.json({ success : false });
+		}
 	} else {
 		res.json({ success : false });
 	}
@@ -200,10 +208,14 @@ app.post('/revise', (req, res) => {
 	const wArticle = escape(wrote_article);
 
 	if(wrote_title && wrote_article && bid) {
-		connection.query('UPDATE boardInfo SET title = ?, article = ? WHERE bid = ?', [wTitle, wArticle, bid], (error, results, fields) => {
-			if(error)	throw error;
-			res.send('<script type="text/javascript">alert("수정이 완료됐습니다."); location.replace("/");</script>');
-		});
+		if(req.headers.referer === `https://luinesse.store/revise/csr/${bid}`) {
+			connection.query('UPDATE boardInfo SET title = ?, article = ? WHERE bid = ?', [wTitle, wArticle, bid], (error, results, fields) => {
+				if(error)	throw error;
+				res.send('<script type="text/javascript">alert("수정이 완료됐습니다."); location.replace("/");</script>');
+			});
+		} else {
+			res.send('<script type="text/javascript">alert("잘못된 접근입니다."); location.href="/";</script>');
+		}
 	} else {
 		res.send('<script type="text/javascript">alert("수정에 실패했습니다."); location.replace("/");</script>');
 	}
@@ -213,14 +225,18 @@ app.post('/revisereq', (req, res) => {
 	const { user, boardId } = req.body;
 
 	if(boardId && user) {
-		connection.query('SELECT username FROM boardInfo WHERE bid = ?', [boardId], (error, results, fields) => {
-			if(error)	throw error;
-			if(results[0].username == user) {
-				res.json({ success : true });
-			} else {
-				res.json({ success : false });
-			}
-		});
+		if(req.headers.referer === `https://luinesse.store/board/csr/${boardId}`) {
+			connection.query('SELECT username FROM boardInfo WHERE bid = ?', [boardId], (error, results, fields) => {
+				if(error)	throw error;
+				if(results[0].username == user) {
+					res.json({ success : true });
+				} else {
+					res.json({ success : false });
+				}
+			});
+		} else {
+			res.json({ success : false });
+		}
 	} else {
 		res.json({ success : false });
 	}
@@ -233,17 +249,21 @@ app.post('/api/search', (req, res) => {
 
 	const startIdx = (page - 1) * perPage;
 
-	connection.query('SELECT COUNT(*) as totalCount FROM boardInfo WHERE title LIKE ? OR article LIKE ?',[search, search], (error, countResult) => {
-		if(error)	throw error;
-		const totalCount = countResult[0].totalCount;
-		const totalPages = Math.ceil(totalCount / perPage);
-
-		connection.query('SELECT * FROM boardInfo WHERE title LIKE ? OR article LIKE ? LIMIT ?, ?', [search, search, startIdx, perPage], (error, rows) => {
-			if (error) throw error;
-			
-			res.json({ totalPages, posts: rows });
+	if(req.headers.referer === 'https://luinesse.store/') {
+		connection.query('SELECT COUNT(*) as totalCount FROM boardInfo WHERE title LIKE ? OR article LIKE ?',[search, search], (error, countResult) => {
+			if(error)	throw error;
+			const totalCount = countResult[0].totalCount;
+			const totalPages = Math.ceil(totalCount / perPage);
+	
+			connection.query('SELECT * FROM boardInfo WHERE title LIKE ? OR article LIKE ? LIMIT ?, ?', [search, search, startIdx, perPage], (error, rows) => {
+				if (error) throw error;
+				
+				res.json({ totalPages, posts: rows });
+			});
 		});
-	});
+	} else {
+		res.status(403).json({ error : '잘못된 접근입니다.' });
+	}
 });
 
 app.get('/api/posts',(req, res) => {
