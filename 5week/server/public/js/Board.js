@@ -216,15 +216,6 @@ function moveToMain() {
     location.href = "/";
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const categoryButton = document.querySelector('.category-button');
-    const menu = document.querySelector('.menu');
-
-    categoryButton.addEventListener('click', () => {
-        menu.classList.toggle('open');
-    });
-});
-
 reviseB.addEventListener("click",reviseAct);
 deleteB.addEventListener("click",deleteAct);
 listB.addEventListener("click",moveToMain);

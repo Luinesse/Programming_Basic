@@ -102,6 +102,7 @@ img {
 }
 
 .menu.open {
+    position: fixed;
     left: 0;
     height: 120%;
 }
