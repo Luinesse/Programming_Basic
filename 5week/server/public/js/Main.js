@@ -5,6 +5,7 @@ const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
+const wroteText = document.querySelector('.wrote_me');
 let currentPage = 1;
 let totalPages = 1;
 
@@ -165,9 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-
-    const wroteText = document.querySelector('.wrote_me');
-    wroteText.addEventListener("click", fetchWrote(currentPage));
 });
 
 function fetchWrote(page) {
@@ -378,3 +376,4 @@ document.addEventListener("DOMContentLoaded",initPage);
 mainPg.addEventListener("click",moveToMain);
 writePg.addEventListener("click",moveToWrite);
 titleH.addEventListener("click",moveToMain);
+wroteText.addEventListener("click", fetchWrote(currentPage));
