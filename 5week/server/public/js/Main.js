@@ -183,6 +183,7 @@ function fetchWrote(page) {
     })
     .then((res) => res.json())
     .then((res) => {
+        totalPages = res.totalPages;
         const board = document.querySelector('.article');
         const articleNav = document.querySelector(".article-nav");
         board.innerHTML = '';
@@ -281,6 +282,7 @@ function searchPosts(searchText, page) {
     })
     .then((res) => res.json())
     .then((res) => {
+        totalPages = res.totalPages;
         const board = document.querySelector('.article');
         const articleNav = document.querySelector(".article-nav");
         board.innerHTML = '';
