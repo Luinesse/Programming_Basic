@@ -243,7 +243,7 @@ app.post('/revisereq', (req, res) => {
 });
 
 app.post('/api/wrote', (req, res) => {
-	const page = req.body;
+	const {page} = req.body;
 	const perPage = 10;
 	const startIdx = (page - 1) * perPage;
 
@@ -263,8 +263,10 @@ app.post('/api/wrote', (req, res) => {
 		} else {
 			res.status(403).json({ error : '잘못된 접근입니다.' });
 		}
+	} else {
+		res.status(403).json({ error : '로그인이 필요합니다.' });
 	}
-})
+});
 
 app.post('/api/search', (req, res) => {
 	const { page, searchText } = req.body;
