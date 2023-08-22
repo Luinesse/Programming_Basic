@@ -264,7 +264,7 @@ app.post('/api/wrote', (req, res) => {
 			res.status(403).json({ error : '잘못된 접근입니다.' });
 		}
 	} else {
-		res.status(403).json({ error : '로그인이 필요합니다.' });
+		res.json({success : false});
 	}
 });
 
