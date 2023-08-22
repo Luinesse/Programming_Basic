@@ -180,6 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
             searchPosts(searchText, page);
         }
     });
+
+    fetchWrote(currentPage);
 });
 
 function fetchWrote(page) {
@@ -386,7 +388,6 @@ function moveToMain() {
     location.href = "/";
 }
 
-wroteText.addEventListener("click", fetchWrote(currentPage));
 document.addEventListener("DOMContentLoaded",initPage);
 mainPg.addEventListener("click",moveToMain);
 writePg.addEventListener("click",moveToWrite);
