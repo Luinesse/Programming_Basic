@@ -5,7 +5,6 @@ const titleH = document.getElementById("goMain");
 const writePg = document.getElementById('write-btn');
 const state = document.querySelector(".sign-text");
 const userhi = document.querySelector(".hi");
-const wroteText = document.querySelector('.wrote_me');
 let currentPage = 1;
 let totalPages = 1;
 
@@ -167,21 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const pageList = document.querySelector('.pageNum');
-    pageList.addEventListener("click", (event) => {
-        if(event.target.tagName === 'LI') {
-            const page = parseInt(event.target.textContent);
-            const activePage = document.querySelector('.pageNum .active');
-            if(activePage) {
-                activePage.classList.remove('active');
-            }
-            event.target.classList.add('active');
-            const searchText = document.querySelector('.search_content').value;
-            searchPosts(searchText, page);
-        }
-    });
-
-    fetchWrote(currentPage);
+    const wroteText = document.querySelector('.wrote_me');
+    wroteText.addEventListener("click", fetchWrote(currentPage));
 });
 
 function fetchWrote(page) {
