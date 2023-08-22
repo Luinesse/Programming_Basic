@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const wroteText = document.querySelector('.wrote_me');
-    wroteText.addEventListener("click", fetchWrote());
+    wroteText.addEventListener("click", fetchWrote(currentPage));
 });
 
 function fetchWrote(page) {
