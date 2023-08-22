@@ -242,6 +242,30 @@ app.post('/revisereq', (req, res) => {
 	}
 });
 
+app.post('/api/wrote', (req, res) => {
+	const page = req.body;
+	const perPage = 10;
+	const startIdx = (page - 1) * perPage;
+
+	if(req.session.user) {
+		if(req.headers.referer === 'https://luinesse.store/') {
+			connection.query('SELECT COUNT(*) as totalCount FROM boardInfo WHERE username = ?',[req.session.user.id], (error, countResult) => {
+				if(error)	throw error;
+				const totalCount = countResult[0].totalCount;
+				const totalPages = Math.ceil(totalCount / perPage);
+		
+				connection.query('SELECT * FROM boardInfo WHERE username = ? LIMIT ?, ?', [req.session.user.id, startIdx, perPage], (error, rows) => {
+					if (error) throw error;
+					
+					res.json({ totalPages, posts: rows });
+				});
+			});
+		} else {
+			res.status(403).json({ error : '잘못된 접근입니다.' });
+		}
+	}
+})
+
 app.post('/api/search', (req, res) => {
 	const { page, searchText } = req.body;
 	const perPage = 10;
