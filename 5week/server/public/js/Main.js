@@ -257,7 +257,27 @@ function searchPosts(searchText, page) {
             board.appendChild(hr);
         });
 
-        createPageBtn();
+        const pageList = document.querySelector(".pageNum");
+        pageList.innerHTML = "";
+
+        for(let i = 1; i <= totalPages; i++) {
+            const pageBtn = document.createElement("li");
+            const btnStyle = {
+                float: "left",
+                marginRight: "20px"
+            };
+
+            for(const [key, value] of Object.entries(btnStyle)) {
+                pageBtn.style[key] = value;
+            }
+
+            pageBtn.textContent = i;
+            pageBtn.addEventListener("click", () => {
+                currentPage = i;
+                searchPosts(searchText, i);
+            });
+            pageList.appendChild(pageBtn);
+        }
     });
 }
 
