@@ -178,7 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const searchText = document.querySelector('.search_content').value;
             searchPosts(searchText, page);
         }
-    })
+    });
+
+
 });
 
 function searchPosts(searchText, page) {
@@ -195,7 +197,6 @@ function searchPosts(searchText, page) {
         const articleNav = document.querySelector(".article-nav");
         board.innerHTML = '';
         board.appendChild(articleNav);
-        createPageBtn();
         res.posts.forEach((row) => {
             const divCell = document.createElement('div');
             const style = {
@@ -256,17 +257,7 @@ function searchPosts(searchText, page) {
             board.appendChild(hr);
         });
 
-        const totalPages = res.totalPages;
-        const pageList = document.querySelector('.pageNum');
-        pageList.innerHTML = '';
-        for (let i = 1; i <= totalPages; i++) {
-            const pageBtn = document.createElement('li');
-            pageBtn.textContent = i;
-            if(i === page) {
-                pageBtn.classList.add('active');
-            }
-            pageList.appendChild(pageBtn);
-        }
+        createPageBtn();
     });
 }
 
