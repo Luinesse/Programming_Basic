@@ -169,12 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageList = document.querySelector('.pageNum');
     pageList.addEventListener("click", (event) => {
         if(event.target.tagName === 'LI') {
-            const page = parseInt(e.target.textContent);
+            const page = parseInt(event.target.textContent);
             const activePage = document.querySelector('.pageNum .active');
             if(activePage) {
                 activePage.classList.remove('active');
             }
-            e.target.classList.add('active');
+            event.target.classList.add('active');
             const searchText = document.querySelector('.search_content').value;
             searchPosts(searchText, page);
         }
